@@ -3,7 +3,6 @@
 <head>
     <title>Protocol</title>
     <style>
-
        @font-face {
     font-family: 'ES Allianz TRIAL';
     src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
@@ -11,7 +10,6 @@
     font-style: normal;
     font-display: swap;
 }
-
     body {
         margin: 0;
         padding: 0;
@@ -52,7 +50,6 @@
         color: grey;
         font-family: 'ES Allianz TRIAL';
         font-weight: 300;
-        cursor: pointer;
     }
     
     .first-paragraph {
@@ -61,6 +58,24 @@
     
     .second-paragraph {
         margin-bottom: 10px;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 40px;
+        margin-top: 40px;
+        justify-content: center;
+    }
+
+    .social-link {
+        color: grey;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .social-link:hover {
+        color: #ffffff;
     }
     
     #content-frame {
@@ -78,15 +93,17 @@
 </head>
 <body>
     <a href="index.html" class="back-arrow">←</a>
-
     <div class="text-container">
         <p class="clickable-text first-paragraph" id="protocol-sentence">a label</p>
         <p class="second-paragraph">founded in 2025</p>
         <p>by Protocol</p>
+        
+        <div class="social-links">
+            <a href="https://interiorr.bandcamp.com/" class="social-link" target="_blank">bandcamp</a>
+            <a href="https://soundcloud.com/interiorlabel" class="social-link" target="_blank">soundcloud</a>
+            <a href="https://www.instagram.com/protocol.intr" class="social-link" target="_blank">instagram</a>
+        </div>
     </div>
     <iframe id="content-frame" src=""></iframe>
-    <script>        
-       
-    </script>
 </body>
 </html>
