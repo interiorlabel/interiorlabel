@@ -63,6 +63,14 @@
             width: 100%;
         }
 
+        /* DESKTOP title image */
+        .title-img-desktop {
+            display: block;
+            width: 170px;       /* adjust if needed */
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
         .title {
             font-size: 22px;
             margin-bottom: 40px;
@@ -87,7 +95,6 @@
             color: #ffffff;
         }
 
-        /* PURE CSS PLAY ICONS */
         .play-icon {
             width: 0;
             height: 0;
@@ -130,6 +137,7 @@
             text-align: center;
         }
 
+        /* MOBILE ONLY — redesign */
         @media (max-width: 600px) {
 
             body {
@@ -137,12 +145,29 @@
             }
 
             .container {
-                margin-top: 22vh; 
+                margin-top: 22vh;
             }
 
+            /* Hide text title on mobile */
             .title {
-                font-size: 26px;
-                margin-bottom: 45px;
+                display: none;
+            }
+
+            /* Hide desktop title img */
+            .title-img-desktop {
+                display: none;
+            }
+
+            /* Center the mobile layout */
+            body {
+                justify-content: center;
+            }
+
+            .title-img-mobile {
+                display: block;
+                width: 58%;
+                max-width: 260px;
+                margin-bottom: 30px;
             }
 
             .track-list {
@@ -151,7 +176,7 @@
             }
 
             .track-item {
-                font-size: 16px;   
+                font-size: 16px;
             }
 
             .description {
@@ -169,6 +194,13 @@
 
     <div class="container">
 
+        <!-- DESKTOP title image -->
+        <img src="title.jpeg" class="title-img-desktop" alt="INTERIØR">
+
+        <!-- MOBILE title image -->
+        <img src="title.jpeg" class="title-img-mobile" alt="INTERIØR" style="display:none;">
+
+        <!-- DESKTOP text title (mobile hidden) -->
         <div class="title">INTERIØR 1</div>
 
         <div class="track-list">
@@ -222,17 +254,14 @@
         function playAudio(track, element) {
             const audio = audioPlayers[track];
 
-            // Pause others
             for (const t in audioPlayers) {
                 if (t !== track) audioPlayers[t].pause();
             }
 
-            // Reset icons
             document.querySelectorAll('.play-icon').forEach(icon => {
                 icon.classList.remove('pause');
             });
 
-            // Toggle
             if (audio.paused) {
                 audio.play();
                 element.querySelector('.play-icon').classList.add('pause');
