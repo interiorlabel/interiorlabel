@@ -21,7 +21,7 @@
             padding: 0;
             background-color: black;
             font-family: 'ES Allianz TRIAL';
-            color: #b9b9b9;
+            color: #b9b9b9';
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -74,57 +74,66 @@
 
        @media (max-width: 768px) {
 
-    .top-right-image {
-        width: 100vw;
-        height: 50vh;
-        object-fit: cover;
-        left: 0;
-        top: 0;
-    }
+            .top-right-image {
+                width: 100vw;
+                height: 50vh;
+                object-fit: cover;
+                left: 0;
+                top: 0;
+            }
 
-    .top-left-menu {
-        position: absolute;
-        top: 50%;                     
-        left: 50%;                    
-        transform: translate(-50%, -50%);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        text-align: center;
-        gap: 18px;                  
-    }
+            .top-left-menu {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                text-align: center;
+                gap: 18px;
+            }
 
-    .logo-img {
-        height: 80px;
-    }
+            .logo-img {
+                height: 80px;
+            }
 
-    .divider {
-        display: none;
-    }
+            .divider {
+                display: none;
+            }
 
-    .menu-links-row {
-        display: flex;
-        flex-direction: row;
-        gap: 18px;
-        font-size: 16px;
-    }
+            .menu-links-row {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+                font-size: 16px;
+            }
 
-    .menu-link {
-        margin: 0;
-        font-size: 16px;
-    }
-}
-@media (max-width: 450px) {
-    .top-right-image {
-        height: 53vh;
-    }
+            .menu-link {
+                margin: 0;
+                font-size: 16px;
+            }
 
-    .top-left-menu {
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
-}
+            .menu-links-row .divider-small {
+                color: #b9b9b9;
+                font-size: 16px;
+                opacity: 0.8;
+                user-select: none;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .top-right-image {
+                height: 53vh;
+            }
+
+            .top-left-menu {
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
     </style>
 </head>
 
@@ -133,14 +142,16 @@
     <div class="top-left-menu">
 
         <img src="title.jpeg" class="logo-img" alt="INTERIØR">
-
         <div class="divider"></div>
 
         <div class="menu-links-row">
             <a href="about.html" class="menu-link">ABOUT</a>
+            <span class="divider-small">I</span>
             <a href="releases.html" class="menu-link">RELEASES</a>
+            <span class="divider-small">I</span>
             <a href="mailto:interiorlabel@proton.me" class="menu-link">CONTACT</a>
         </div>
+
     </div>
 
     <img src="introimg.jpg" class="top-right-image" alt="Interior">
