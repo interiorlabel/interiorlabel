@@ -60,26 +60,30 @@
         .container {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            gap: 35px;
             width: 100%;
             max-width: 600px;
+
+            transform: translateY(-20px);
         }
 
         .title-img-desktop {
             width: 160px;
             opacity: 0.9;
+            margin-bottom: 35px;
         }
 
         .title-img-mobile {
             display: none;
+            margin-bottom: 35px;
         }
 
+        /* Tracklist spacing */
         .track-list {
             display: flex;
             flex-direction: column;
-            gap: 35px;
+            gap: 25px; 
+            margin-bottom: 30px;
         }
 
         .track-item {
@@ -129,7 +133,12 @@
             margin-top: 10px;
         }
 
+  
         @media (max-width: 600px) {
+
+            .container {
+                transform: translateY(-40px); 
+            }
 
             .title-img-desktop {
                 display: none;
@@ -137,13 +146,15 @@
 
             .title-img-mobile {
                 display: block;
-                width: 20%;
-                max-width: 125px;
+                width: 30%;
+                max-width: 120px;
                 opacity: 0.9;
+                margin-bottom: 28px;
             }
 
             .track-list {
-                gap: 28px;
+                gap: 22px;
+                margin-bottom: 25px;
             }
 
             .track-item {
@@ -152,6 +163,7 @@
 
             .description {
                 font-size: 13px;
+                margin-top: 35px;
             }
         }
     </style>
