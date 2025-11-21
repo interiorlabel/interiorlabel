@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Protocol</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
        @font-face {
             font-family: 'ES Allianz TRIAL';
@@ -10,7 +11,6 @@
             font-style: normal;
             font-display: swap;
         }
-
         body {
             margin: 0;
             padding: 0;
@@ -21,7 +21,6 @@
             align-items: center;
             min-height: 100vh;
         }
-
         .back-arrow {
             position: fixed;
             top: 30px;
@@ -32,17 +31,14 @@
             text-decoration: none;
             z-index: 100;
         }
-
         .back-arrow:hover {
             color: #ffffff;
         }
-
         .text-container {
             text-align: justify;
             max-width: 600px;
             padding: 0 20px;
         }
-
         p {
             margin: 0;
             font-size: 16px;
@@ -50,33 +46,27 @@
             color: grey;
             font-weight: 300;
         }
-
         .first-paragraph {
             margin-bottom: 10px;
         }
-
         .second-paragraph {
             margin-bottom: 10px;
         }
-
         .social-links {
             display: flex;
             gap: 40px;
             margin-top: 80px;
             justify-content: center;
         }
-
         .social-link {
             color: grey;
             font-size: 15px;
             cursor: pointer;
             text-decoration: underline;
         }
-
         .social-link:hover {
             color: #ffffff;
         }
-
         #content-frame {
             position: fixed;
             top: 0;
@@ -90,19 +80,16 @@
         }
         
         @media (max-width: 600px) {
-
             p {
                 font-size: 20px;
                 line-height: 1.55;
             }
-
             .social-links {
                 flex-direction: column;  
                 gap: 15px;
                 margin-top: 50px;
                 align-items: center;
             }
-
             .social-link {
                 font-size: 18px;
             }
@@ -111,19 +98,16 @@
 </head>
 <body>
     <a href="index.html" class="back-arrow">←</a>
-
     <div class="text-container">
         <p class="clickable-text first-paragraph" id="protocol-sentence">a label</p>
         <p class="second-paragraph">founded in 2025</p>
         <p>by Protocol</p>
-
         <div class="social-links">
             <a href="https://interiorr.bandcamp.com/" class="social-link" target="_blank">bandcamp</a>
             <a href="https://soundcloud.com/interiorlabel" class="social-link" target="_blank">soundcloud</a>
             <a href="https://www.instagram.com/protocol.intr" class="social-link" target="_blank">instagram</a>
         </div>
     </div>
-
     <iframe id="content-frame" src=""></iframe>
 </body>
 </html>
