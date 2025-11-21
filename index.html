@@ -19,41 +19,37 @@
             padding: 0;
             background-color: black;
             font-family: 'ES Allianz TRIAL';
-            color: #b9b9b9';
+            color: #b9b9b9;
             background-image: url('introimg.jpeg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             min-height: 100vh;
-            display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
         }
 
-        /* ---------- MENU ---------- */
         .top-left-menu {
-            position: fixed;
-            top: 15px;
-            left: 15px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
             display: flex;
             align-items: center;
             font-size: 14px;
-            z-index: 10;
-            flex-wrap: wrap; /* allows wrapping on mobile */
-            gap: 10px;
         }
 
         .interior {
-            font-size: 24px;
+            margin-right: 10px;
+            font-size: 25px;
             font-weight: bold;
+            margin-top: 1px;
             text-decoration: none;
             color: #b9b9b9;
         }
 
         .divider {
             width: 1px;
-            height: 22px;
+            height: 25px;
             background-color: #b9b9b9;
+            margin: 15px;
         }
 
         .menu-link {
@@ -61,6 +57,7 @@
             text-decoration: none;
             color: #b9b9b9;
             font-size: 14px;
+            margin: 0 12px;
         }
 
         .menu-link:hover {
@@ -71,47 +68,68 @@
             position: absolute;
             top: 0;
             right: 0;
-            width: 50vw;     
-            max-width: 650px; 
+            max-width: 650px;
             height: auto;
         }
 
         @media (max-width: 768px) {
+
+            body {
+                background-position: center top;
+            }
+
             .top-left-menu {
+                position: absolute;
+                top: 42vh;                 
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
                 flex-direction: row;
-                font-size: 12px;
-                gap: 8px;
-                top: 10px;
-                left: 10px;
+                justify-content: center;
+                align-items: center;
+                gap: 12px;                
+                width: 90%;
+                font-size: 14px;         
             }
 
             .interior {
-                font-size: 20px;
+                font-size: 25px;           
+                margin-right: 5px;
             }
 
             .divider {
-                height: 18px;
+                height: 20px;
+                margin: 0 6px;
             }
 
+            .menu-link {
+                font-size: 14px;          
+                margin: 0 6px;
+            }
+
+  
             .top-right-image {
-                width: 80vw;   
-                right: 10px;
-                top: 60px;
+                display: none;
             }
         }
 
         @media (max-width: 450px) {
-            .top-right-image {
-                width: 90vw;
-                top: 90px;
+
+            .top-left-menu {
+                top: 45vh;
             }
 
             .interior {
-                font-size: 18px;
+                font-size: 25px; 
+            }
+
+            .menu-link {
+                font-size: 14px; 
             }
         }
     </style>
 </head>
+
 <body>
 
     <div class="top-left-menu">
@@ -126,4 +144,5 @@
 
 </body>
 </html>
+
 
