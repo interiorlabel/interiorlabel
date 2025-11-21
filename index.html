@@ -9,12 +9,13 @@
 
     <style>
         @font-face {
-    font-family: 'ES Allianz TRIAL';
-    src: url ('ESAllianzTRIAL-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+            font-family: 'ES Allianz TRIAL';
+            src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -24,7 +25,6 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
-
 
         .top-left-menu {
             position: absolute;
@@ -76,13 +76,11 @@
             object-fit: cover;
         }
 
+        @media (max-width: 768px) {
 
-            @media (max-width: 768px) {
-    .interior {
-        font-weight: normal;     
-        -webkit-text-stroke: 0.3px #b9b9b9;  
-    }
-}
+            .interior {
+                font-weight: normal;
+            }
 
             .top-right-image {
                 width: 100vw;
@@ -92,7 +90,6 @@
                 top: 0;
             }
 
-            /* Center menu + title under image */
             .top-left-menu {
                 position: absolute;
                 top: 53vh;
@@ -108,7 +105,6 @@
 
             .interior {
                 font-size: 32px;
-                font-weight: bold;
                 margin-right: 0;
             }
 
