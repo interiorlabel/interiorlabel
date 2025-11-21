@@ -8,130 +8,144 @@
     <title>INTERIØR</title>
 
     <style>
-        @font-face {
-            font-family: 'ES Allianz TRIAL';
-            src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
+    @font-face {
+        font-family: 'ES Allianz TRIAL';
+        src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: black;
-            font-family: 'ES Allianz TRIAL';
-            color: #b9b9b9;
-            min-height: 100vh;
-            overflow-x: hidden;
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        font-family: 'ES Allianz TRIAL';
+        color: #b9b9b9;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .top-left-menu {
+        position: absolute;
+        top: 20px;
+        left: 40px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        z-index: 10;
+    }
+
+    .logo-img {
+        height: 70px;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    /* SHOW divider on desktop */
+    .divider {
+        display: block;
+        width: 1px;
+        height: 25px;
+        background-color: #b9b9b9;
+        margin: 15px;
+    }
+
+    /* HIDE "I" dividers on desktop */
+    .divider-small {
+        display: none;
+    }
+
+    .menu-link {
+        cursor: pointer;
+        text-decoration: none;
+        color: #b9b9b9;
+        font-size: 14px;
+        margin: 0 12px;
+    }
+
+    .menu-link:hover {
+        opacity: 0.7;
+    }
+
+    .top-right-image {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 45vw;
+        max-width: 650px;
+        height: auto;
+        z-index: 1;
+        object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+
+        .top-right-image {
+            width: 100vw;
+            height: 50vh;
+            object-fit: cover;
+            left: 0;
+            top: 0;
         }
 
         .top-left-menu {
             position: absolute;
-            top: 20px;
-            left: 40px;
-            display: flex;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            font-size: 14px;
-            z-index: 10;
+            width: 100%;
+            text-align: center;
+            gap: 18px;
         }
 
         .logo-img {
-            height: 70px;
-            pointer-events: none;
-            user-select: none;
+            height: 90px;
         }
 
+        /* HIDE desktop divider on mobile */
         .divider {
             display: none;
         }
 
+        .menu-links-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            font-size: 16px;
+        }
+
         .menu-link {
-            cursor: pointer;
-            text-decoration: none;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        /* SHOW mobile dividers between menu items */
+        .divider-small {
+            display: inline;
             color: #b9b9b9;
-            font-size: 14px;
-            margin: 0 12px;
+            font-size: 16px;
+            opacity: 0.8;
+            user-select: none;
         }
+    }
 
-        .menu-link:hover {
-            opacity: 0.7;
-        }
-
+    @media (max-width: 450px) {
         .top-right-image {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 45vw;
-            max-width: 650px;
-            height: auto;
-            z-index: 1;
-            object-fit: cover;
+            height: 53vh;
         }
 
-       @media (max-width: 768px) {
-
-            .top-right-image {
-                width: 100vw;
-                height: 50vh;
-                object-fit: cover;
-                left: 0;
-                top: 0;
-            }
-
-            .top-left-menu {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                text-align: center;
-                gap: 18px;
-            }
-
-            .logo-img {
-                height: 90px;
-            }
-
-            .divider {
-                display: none;
-            }
-
-            .menu-links-row {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                gap: 20px; 
-                font-size: 16px;
-            }
-
-            .menu-link {
-                margin: 0;
-                font-size: 16px;
-            }
-
-            .menu-links-row .divider-small {
-                color: #b9b9b9;
-                font-size: 16px;
-                opacity: 0.8;
-                user-select: none;
-            }
+        .top-left-menu {
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
+    }
+</style>
 
-        @media (max-width: 450px) {
-            .top-right-image {
-                height: 53vh;
-            }
-
-            .top-left-menu {
-                top: 50%;
-                transform: translate(-50%, -50%);
-            }
-        }
-    </style>
 </head>
 
 <body>
