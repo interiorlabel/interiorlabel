@@ -36,14 +36,10 @@
             z-index: 10;
         }
 
-        .interior {
-            margin-right: 10px;
-            font-size: 25px;
-            font-weight: normal;
-            margin-top: 1px;
-            color: #b9b9b9;
-            text-decoration: none;
+        .logo-img {
+            height: 28px;
             pointer-events: none;
+            user-select: none;
         }
 
         .divider {
@@ -76,11 +72,8 @@
             object-fit: cover;
         }
 
+        /* MOBILE LAYOUT */
         @media (max-width: 768px) {
-
-            .interior {
-                font-weight: normal;
-            }
 
             .top-right-image {
                 width: 100vw;
@@ -103,9 +96,8 @@
                 gap: 18px;
             }
 
-            .interior {
-                font-size: 32px;
-                margin-right: 0;
+            .logo-img {
+                height: 48px;
             }
 
             .divider {
@@ -141,7 +133,8 @@
 <body>
 
     <div class="top-left-menu">
-        <span class="interior">INTERIØR</span>
+
+        <img src="introtitle.jpeg" class="logo-img" alt="INTERIØR">
 
         <div class="divider"></div>
 
