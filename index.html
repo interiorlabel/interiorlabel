@@ -10,9 +10,7 @@
     <style>
         @font-face {
     font-family: 'ES Allianz TRIAL';
-    src: url('ESAllianzTRIAL-Regular.woff2') format('woff2'),
-         url('ESAllianzTRIAL-Regular.woff') format('woff'),
-         url('ESAllianzTRIAL-Regular.ttf') format('truetype');
+    src: url ('ESAllianzTRIAL-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -41,7 +39,7 @@
         .interior {
             margin-right: 10px;
             font-size: 25px;
-            font-weight: bold;
+            font-weight: normal;
             margin-top: 1px;
             color: #b9b9b9;
             text-decoration: none;
@@ -79,7 +77,12 @@
         }
 
 
-        @media (max-width: 768px) {
+            @media (max-width: 768px) {
+    .interior {
+        font-weight: normal;     
+        -webkit-text-stroke: 0.3px #b9b9b9;  
+    }
+}
 
             .top-right-image {
                 width: 100vw;
