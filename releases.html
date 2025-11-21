@@ -65,9 +65,13 @@
 
         .title-img-desktop {
             display: block;
-            width: 170px;      
+            width: 170px;
             margin-bottom: 40px;
             opacity: 0.9;
+        }
+
+        .title-img-mobile {
+            display: none;
         }
 
         .track-list {
@@ -126,7 +130,6 @@
             text-align: center;
         }
 
-        /* MOBILE REDESIGN */
         @media (max-width: 600px) {
 
             body {
@@ -138,17 +141,16 @@
                 margin-top: 22vh;
             }
 
-            /* Desktop title hidden on mobile */
             .title-img-desktop {
                 display: none;
             }
 
-            /* Mobile title image */
             .title-img-mobile {
                 display: block;
                 width: 58%;
                 max-width: 260px;
                 margin-bottom: 30px;
+                opacity: 0.9;
             }
 
             .track-list {
@@ -177,7 +179,7 @@
 
         <img src="title2.jpeg" class="title-img-desktop" alt="INTERIØR">
 
-        <img src="title2.jpeg" class="title-img-mobile" alt="INTERIØR" style="display:none;">
+        <img src="title2.jpeg" class="title-img-mobile" alt="INTERIØR">
 
         <div class="track-list">
 
