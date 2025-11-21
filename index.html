@@ -1,133 +1,142 @@
-<style>
-    @font-face {
-        font-family: 'ES Allianz TRIAL';
-        src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    body {
-        margin: 0;
-        padding: 0;
-        background-color: black;
-        font-family: 'ES Allianz TRIAL';
-        color: #b9b9b9;
-        min-height: 100vh;
-        overflow-x: hidden;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    .top-left-menu {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-        z-index: 10;
-    }
+    <title>INTERIØR</title>
 
-    .interior {
-        margin-right: 10px;
-        font-size: 25px;
-        font-weight: bold;
-        margin-top: 1px;
-        color: #b9b9b9;
-        text-decoration: none;
-        pointer-events: none;
-    }
+    <style>
+        @font-face {
+            font-family: 'ES Allianz TRIAL';
+            src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
 
-    .divider {
-        width: 1px;
-        height: 25px;
-        background-color: #b9b9b9;
-        margin: 15px;
-    }
-
-    .menu-link {
-        cursor: pointer;
-        text-decoration: none;
-        color: #b9b9b9;
-        font-size: 14px;
-        margin: 0 12px;
-    }
-
-    .menu-link:hover {
-        opacity: 0.7;
-    }
-
-    .top-right-image {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 45vw;        
-        max-width: 650px;
-        height: auto;
-        z-index: 1;
-        object-fit: cover;
-    }
-
-    @media (max-width: 768px) {
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            font-family: 'ES Allianz TRIAL';
+            color: #b9b9b9;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
         .top-left-menu {
-            top: 45vh;
-            left: 50%;
-            transform: translateX(-50%);
-            flex-direction: row;
-            justify-content: center;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
             align-items: center;
-            width: 100%;
-            gap: 10px;
+            font-size: 14px;
+            z-index: 10;
         }
 
         .interior {
-            font-size: 28px;
+            margin-right: 10px;
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 1px;
+            color: #b9b9b9;
+            text-decoration: none;
+            pointer-events: none;
         }
 
         .divider {
-            height: 20px;
-            margin: 0 6px;
+            width: 1px;
+            height: 25px;
+            background-color: #b9b9b9;
+            margin: 15px;
         }
 
         .menu-link {
-            font-size: 15px;
-            margin: 0 6px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #b9b9b9;
+            font-size: 14px;
+            margin: 0 12px;
+        }
+
+        .menu-link:hover {
+            opacity: 0.7;
         }
 
         .top-right-image {
-            width: 80vw;      
-            right: 0;          
+            position: absolute;
             top: 0;
-            opacity: 0.9;
-        }
-    }
-
-    /* VERY SMALL MOBILE */
-    @media (max-width: 450px) {
-        .top-left-menu {
-            top: 48vh;
-        }
-
-        .top-right-image {
-            width: 95vw;    
             right: 0;
+            width: 45vw;
+            max-width: 650px;
+            height: auto;
+            z-index: 1;
+            object-fit: cover;
         }
-    }
-</style>
 
+        @media (max-width: 768px) {
+
+            .top-right-image {
+                width: 100vw;
+                height: 50vh; 
+                object-fit: cover;
+                left: 0;
+                top: 0;
+            }
+
+            .top-left-menu {
+                top: 52vh; 
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                gap: 10px;
+            }
+
+            .interior {
+                font-size: 28px;
+            }
+
+            .divider {
+                height: 20px;
+                margin: 0 6px;
+            }
+
+            .menu-link {
+                font-size: 15px;
+                margin: 0 8px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .top-right-image {
+                height: 53vh;
+            }
+
+            .top-left-menu {
+                top: 56vh;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="top-left-menu">
-    <span class="interior">INTERIØR</span>
-    <div class="divider"></div>
-    <a href="about.html" class="menu-link">ABOUT</a>
-    <a href="releases.html" class="menu-link">RELEASES</a>
-    <a href="mailto:interiorlabel@proton.me" class="menu-link">CONTACT</a>
-</div>
+    <div class="top-left-menu">
+        <span class="interior">INTERIØR</span>
+        <div class="divider"></div>
+        <a href="about.html" class="menu-link">ABOUT</a>
+        <a href="releases.html" class="menu-link">RELEASES</a>
+        <a href="mailto:interiorlabel@proton.me" class="menu-link">CONTACT</a>
+    </div>
 
-<img src="introimg.jpg" class="top-right-image" alt="Interior">
+    <img src="introimg.jpg" class="top-right-image" alt="Interior">
 
 </body>
+
 </html>
