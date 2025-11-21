@@ -87,7 +87,7 @@
             color: #ffffff;
         }
 
-        /* ----- PURE CSS PLAY / PAUSE ICONS ----- */
+        /* PURE CSS PLAY ICONS */
         .play-icon {
             width: 0;
             height: 0;
@@ -130,20 +130,33 @@
             text-align: center;
         }
 
-        /* ---------- MOBILE ADJUSTMENTS ---------- */
         @media (max-width: 600px) {
+
+            body {
+                align-items: flex-start;
+            }
+
+            .container {
+                margin-top: 22vh; 
+            }
+
             .title {
-                font-size: 28px;
-                margin-bottom: 60px;
+                font-size: 26px;
+                margin-bottom: 45px;
+            }
+
+            .track-list {
+                gap: 28px;
+                margin-bottom: 35px;
             }
 
             .track-item {
-                font-size: 20px;
+                font-size: 16px;   
             }
 
             .description {
-                font-size: 14px;
-                margin-top: 80px;
+                font-size: 13px;
+                margin-top: 70px;
             }
         }
     </style>
@@ -236,4 +249,3 @@
 
 </body>
 </html>
-
