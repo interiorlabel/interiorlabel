@@ -2,26 +2,33 @@
 <html>
 <head>
     <title>Protocol - Works</title>
-    <style>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
         @font-face {
-    font-family: 'ES Allianz TRIAL';
-    src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+            font-family: 'ES Allianz TRIAL';
+            src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
 
         body {
             margin: 0;
             padding: 0;
             background-color: black;
-            font-family:'ES Allianz TRIAL';
+            font-family: 'ES Allianz TRIAL';
+            color: grey;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            position: relative; 
+        }
+
+        a {
+            color: grey;
+            text-decoration: none;
         }
 
         .back-arrow {
@@ -29,9 +36,6 @@
             top: 30px;
             left: 20px;
             font-size: 18px;
-            color: grey;
-            cursor: pointer;
-            text-decoration: none;
             z-index: 100;
         }
 
@@ -44,8 +48,6 @@
             top: 30px;
             right: 18px;
             font-size: 14px;
-            color: grey;
-            cursor: pointer;
             text-decoration: underline;
             z-index: 100;
         }
@@ -54,28 +56,30 @@
             color: #ffffff;
         }
 
-        .title {
-            color: grey;
-            font-size: 20px;
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
         .container {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            width: 100%;
         }
 
-        .right-section {
-            display: flex;  
-            gap: 80px; 
+        .title {
+            font-size: 22px;
+            margin-bottom: 40px;
+        }
+
+        .track-list {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            margin-bottom: 40px;
         }
 
         .track-item {
-            color: grey;
-            font-size: 16px; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 17px;
             cursor: pointer;
         }
 
@@ -85,122 +89,103 @@
 
         .play-icon {
             font-size: 15px;
-            color: grey; 
         }
 
         .description {
-            color: grey;
-            font-size: 11px;
+            font-size: 12px;
+            margin-top: 40px;
             text-align: center;
-            margin-top: 80px; 
-            line-height: 1.6;
         }
 
-        .down-arrow {
-            position: absolute;
-            bottom: 30px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            font-size: 24px;
-            color: grey;
-            cursor: pointer;
-            text-decoration: none;
-            z-index: 100;
-        }
+        /* ---------- MOBILE LAYOUT ---------- */
+        @media (max-width: 600px) {
+            .title {
+                font-size: 28px;
+                margin-bottom: 60px;
+            }
 
-        .down-arrow:hover {
-            color: #ffffff;
-        }
+            .track-item {
+                font-size: 20px;
+            }
 
-        .scroll-down {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: grey;
-            font-size: 14px;
-            text-transform: lowercase;
-            z-index: 100;
-            pointer-events: none; 
+            .description {
+                font-size: 14px;
+                margin-top: 80px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <div class="scroll-down">scroll down</div>
-
     <a href="index.html" class="back-arrow">←</a>
-
     <a href="https://interiorr.bandcamp.com/" class="bandcamp-link" target="_blank">bandcamp</a>
-    
+
     <div class="container">
+
         <div class="title">INTERIØR 1</div>
-        
-        <div class="right-section">
-            <div class="track-item" onclick="playAudio('Untitled291.wav', this)">
+
+        <div class="track-list">
+
+            <div class="track-item" onclick="playAudio('audio/Untitled291.mp3', this)">
                 <span class="play-icon">▶</span>
                 <span>untitled 291</span>
             </div>
-            <div class="track-item" onclick="playAudio('Untitled292.wav', this)">
+
+            <div class="track-item" onclick="playAudio('audio/Untitled292.mp3', this)">
                 <span class="play-icon">▶</span>
                 <span>untitled 292</span>
             </div>
-            <div class="track-item" onclick="playAudio('Untitled293.wav', this)">
+
+            <div class="track-item" onclick="playAudio('audio/Untitled293.mp3', this)">
                 <span class="play-icon">▶</span>
                 <span>untitled 293</span>
             </div>
-            <div class="track-item" onclick="playAudio('Untitled294.wav', this)">
+
+            <div class="track-item" onclick="playAudio('audio/Untitled294.mp3', this)">
                 <span class="play-icon">▶</span>
-                <span>untitled 294</span> 
+                <span>untitled 294</span>
             </div>
+
         </div>
 
         <div class="description">
             150 copies on vinyl to be released in March 2026.<br>
             Composed in London by Felipe Pinto.
         </div>
+
     </div>
 
-    <audio id="audioPlayer" preload="auto"></audio>
-
     <script>
-        let hasScrolled = false; 
-
-        window.addEventListener('scroll', function() {
-            if (!hasScrolled) { 
-                hasScrolled = true; 
-                window.location.href = 'nextPage.html'; 
-            }
-        });
-
         const audioPlayers = {};
 
-        // Preload audio tracks
-        const trackFiles = ['Untitled291.wav', 'Untitled292.wav', 'Untitled293.wav', 'Untitled294.wav'];
+        const trackFiles = [
+            'audio/Untitled291.mp3',
+            'audio/Untitled292.mp3',
+            'audio/Untitled293.mp3',
+            'audio/Untitled294.mp3'
+        ];
 
         trackFiles.forEach(track => {
-            const audioTag = new Audio(track);
-            audioTag.preload = "auto"; 
-            audioPlayers[track] = audioTag; 
+            const audio = new Audio(track);
+            audio.preload = "auto";
+            audioPlayers[track] = audio;
         });
 
         function playAudio(track, element) {
             const audio = audioPlayers[track];
 
-            // Pause all other audio tracks and reset their icons
-            for (const audioTrack in audioPlayers) {
-                if (audioTrack !== track) {
-                    audioPlayers[audioTrack].pause();
-                }
+            // Pause others
+            for (const t in audioPlayers) {
+                if (t !== track) audioPlayers[t].pause();
             }
 
-            // Reset all play icons
-            const allTracks = document.querySelectorAll('.track-item');
-            allTracks.forEach(item => {
-                item.querySelector('.play-icon').textContent = '▶';
+            // Reset all icons
+            document.querySelectorAll('.play-icon').forEach(icon => {
+                icon.textContent = '▶';
             });
 
-            // Toggle play/pause for the selected track
+            // Toggle
             if (audio.paused) {
                 audio.play();
                 element.querySelector('.play-icon').textContent = '⏸';
@@ -209,11 +194,11 @@
                 element.querySelector('.play-icon').textContent = '▶';
             }
 
-            // Reset icon when audio ends
-            audio.onended = function() {
+            audio.onended = () => {
                 element.querySelector('.play-icon').textContent = '▶';
             };
         }
     </script>
+
 </body>
 </html>
