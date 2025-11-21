@@ -1,132 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protocol</title>
+<style>
+    @font-face {
+        font-family: 'ES Allianz TRIAL';
+        src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
 
-    <style>
-        @font-face {
-            font-family: 'ES Allianz TRIAL';
-            src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        font-family: 'ES Allianz TRIAL';
+        color: #b9b9b9;
+        background-image: url('introimg.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: black;
-            font-family: 'ES Allianz TRIAL';
-            color: #b9b9b9;
-            background-image: url('introimg.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-        }
+    .top-left-menu {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .interior {
+        margin-right: 10px;
+        font-size: 25px;
+        font-weight: bold;
+        margin-top: 1px;
+        text-decoration: none;
+        color: #b9b9b9;
+        pointer-events: none;
+    }
+
+    .divider {
+        width: 1px;
+        height: 25px;
+        background-color: #b9b9b9;
+        margin: 15px;
+    }
+
+    .menu-link {
+        cursor: pointer;
+        text-decoration: none;
+        color: #b9b9b9;
+        font-size: 14px;
+        margin: 0 12px;
+    }
+
+    .menu-link:hover {
+        opacity: 0.7;
+    }
+
+    .top-right-image {
+        position: absolute;
+        top: 0;
+        right: 0;
+        max-width: 850px; 
+        width: auto;
+        height: auto;
+    }
+
+    @media (max-width: 768px) {
 
         .top-left-menu {
-            position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 45vh;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
+            flex-direction: row;
+            justify-content: center;
             align-items: center;
-            font-size: 14px;
+            width: 100%;
+            gap: 10px;
         }
 
         .interior {
-            margin-right: 10px;
-            font-size: 25px;
-            font-weight: bold;
-            margin-top: 1px;
-            text-decoration: none;
-            color: #b9b9b9;
-            pointer-events: none; 
+            font-size: 28px;
         }
 
         .divider {
-            width: 1px;
-            height: 25px;
-            background-color: #b9b9b9;
-            margin: 15px;
+            height: 20px;
+            margin: 0 6px;
         }
 
         .menu-link {
-            cursor: pointer;
-            text-decoration: none;
-            color: #b9b9b9;
-            font-size: 14px;
-            margin: 0 12px;
-        }
-
-        .menu-link:hover {
-            opacity: 0.7;
+            font-size: 15px;
+            margin: 0 6px;
         }
 
         .top-right-image {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 250px;
-            height: auto;
-            object-fit: cover;
+            width: 130vw;      
+            max-width: none;
+            opacity: 0.9;
+            right: -20vw;      
+        }
+    }
+
+    @media (max-width: 450px) {
+
+        .top-left-menu {
+            top: 48vh;
         }
 
-        @media (max-width: 768px) {
-
-            body {
-                background-position: center top;
-            }
-
-            .top-left-menu {
-                top: 46vh;
-                left: 50%;
-                transform: translateX(-50%);
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                gap: 8px;
-            }
-
-            .interior {
-                font-size: 28px;
-                margin-right: 6px;
-            }
-
-            .divider {
-                height: 18px;
-                margin: 0 6px;
-            }
-
-            .menu-link {
-                font-size: 15px;
-                margin: 0 6px;
-            }
-
-            .top-right-image {
-                width: 45vw;        
-                max-width: 180px;  
-                top: 10px;
-                right: 10px;
-                opacity: 0.95;
-            }
+        .top-right-image {
+            width: 150vw;     
+            right: -30vw;
         }
+    }
+</style>
 
-        @media (max-width: 450px) {
-            .top-left-menu {
-                top: 48vh;
-            }
-
-            .top-right-image {
-                width: 50vw;
-                max-width: 160px;
-            }
-        }
-    </style>
 </head>
 
 <body>
