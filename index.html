@@ -54,7 +54,7 @@
         z-index: 1;
         object-fit: cover;
         opacity: 0;
-        animation: fadeIn 1.5s ease-in forwards;
+        animation: fadeIn 1.5s ease-in 1.5s forwards;
     }
     
     .logo-img {
@@ -103,6 +103,12 @@
             text-align: center;
             gap: 18px;
         }
+
+        .divider, .menu-links-row {
+        opacity: 0;
+        animation: fadeIn 1.5s ease-in 3s forwards;
+        }
+        
         .logo-img {
             height: 90px;
         }
