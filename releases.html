@@ -87,8 +87,41 @@
             color: #ffffff;
         }
 
+        /* ----- PURE CSS PLAY / PAUSE ICONS ----- */
         .play-icon {
-            font-size: 15px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 7px 0 7px 12px;
+            border-color: transparent transparent transparent grey;
+            display: inline-block;
+            margin-right: 8px;
+            transition: 0.2s;
+        }
+
+        .play-icon.pause {
+            width: 12px;
+            height: 12px;
+            border: none;
+            position: relative;
+        }
+
+        .play-icon.pause::before,
+        .play-icon.pause::after {
+            content: "";
+            position: absolute;
+            width: 4px;
+            height: 12px;
+            background: grey;
+            top: 0;
+        }
+
+        .play-icon.pause::before {
+            left: 0;
+        }
+
+        .play-icon.pause::after {
+            right: 0;
         }
 
         .description {
@@ -97,7 +130,7 @@
             text-align: center;
         }
 
-        /* ---------- MOBILE LAYOUT ---------- */
+        /* ---------- MOBILE ADJUSTMENTS ---------- */
         @media (max-width: 600px) {
             .title {
                 font-size: 28px;
@@ -128,28 +161,29 @@
         <div class="track-list">
 
             <div class="track-item" onclick="playAudio('audio/Untitled291.mp3', this)">
-                <span class="play-icon">▶</span>
+                <span class="play-icon"></span>
                 <span>untitled 291</span>
             </div>
 
             <div class="track-item" onclick="playAudio('audio/Untitled292.mp3', this)">
-                <span class="play-icon">▶</span>
+                <span class="play-icon"></span>
                 <span>untitled 292</span>
             </div>
 
             <div class="track-item" onclick="playAudio('audio/Untitled293.mp3', this)">
-                <span class="play-icon">▶</span>
+                <span class="play-icon"></span>
                 <span>untitled 293</span>
             </div>
 
             <div class="track-item" onclick="playAudio('audio/Untitled294.mp3', this)">
-                <span class="play-icon">▶</span>
+                <span class="play-icon"></span>
                 <span>untitled 294</span>
             </div>
 
         </div>
 
         <div class="description">
+            All recordings from live hardware jams.<br>
             150 copies on vinyl to be released in March 2026.<br>
             Composed in London by Felipe Pinto.
         </div>
@@ -180,25 +214,26 @@
                 if (t !== track) audioPlayers[t].pause();
             }
 
-            // Reset all icons
+            // Reset icons
             document.querySelectorAll('.play-icon').forEach(icon => {
-                icon.textContent = '▶';
+                icon.classList.remove('pause');
             });
 
             // Toggle
             if (audio.paused) {
                 audio.play();
-                element.querySelector('.play-icon').textContent = '⏸';
+                element.querySelector('.play-icon').classList.add('pause');
             } else {
                 audio.pause();
-                element.querySelector('.play-icon').textContent = '▶';
+                element.querySelector('.play-icon').classList.remove('pause');
             }
 
             audio.onended = () => {
-                element.querySelector('.play-icon').textContent = '▶';
+                element.querySelector('.play-icon').classList.remove('pause');
             };
         }
     </script>
 
 </body>
 </html>
+
