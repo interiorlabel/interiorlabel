@@ -26,6 +26,7 @@
             overflow-x: hidden;
         }
 
+
         .top-left-menu {
             position: absolute;
             top: 20px;
@@ -76,39 +77,51 @@
             object-fit: cover;
         }
 
+
         @media (max-width: 768px) {
 
             .top-right-image {
                 width: 100vw;
-                height: 50vh; 
+                height: 50vh;
                 object-fit: cover;
                 left: 0;
                 top: 0;
             }
 
+            /* Center menu + title under image */
             .top-left-menu {
-                top: 52vh; 
+                position: absolute;
+                top: 53vh;
                 left: 50%;
                 transform: translateX(-50%);
-                flex-direction: row;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 width: 100%;
-                gap: 10px;
+                text-align: center;
+                gap: 18px;
             }
 
             .interior {
-                font-size: 28px;
+                font-size: 32px;
+                font-weight: bold;
+                margin-right: 0;
             }
 
             .divider {
-                height: 20px;
-                margin: 0 6px;
+                display: none;
+            }
+
+            .menu-links-row {
+                display: flex;
+                flex-direction: row;
+                gap: 18px;
+                font-size: 16px;
             }
 
             .menu-link {
-                font-size: 15px;
-                margin: 0 8px;
+                margin: 0;
+                font-size: 16px;
             }
         }
 
@@ -129,14 +142,17 @@
 
     <div class="top-left-menu">
         <span class="interior">INTERIØR</span>
+
         <div class="divider"></div>
-        <a href="about.html" class="menu-link">ABOUT</a>
-        <a href="releases.html" class="menu-link">RELEASES</a>
-        <a href="mailto:interiorlabel@proton.me" class="menu-link">CONTACT</a>
+
+        <div class="menu-links-row">
+            <a href="about.html" class="menu-link">ABOUT</a>
+            <a href="releases.html" class="menu-link">RELEASES</a>
+            <a href="mailto:interiorlabel@proton.me" class="menu-link">CONTACT</a>
+        </div>
     </div>
 
     <img src="introimg.jpg" class="top-right-image" alt="Interior">
 
 </body>
-
 </html>
