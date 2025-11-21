@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protocol</title>
 
     <style>
@@ -43,6 +43,7 @@
             margin-top: 1px;
             text-decoration: none;
             color: #b9b9b9;
+            pointer-events: none;   
         }
 
         .divider {
@@ -72,6 +73,7 @@
             height: auto;
         }
 
+
         @media (max-width: 768px) {
 
             body {
@@ -79,30 +81,29 @@
             }
 
             .top-left-menu {
-                position: absolute;
-                top: 40vh;
+                top: 46vh;
                 left: 50%;
                 transform: translateX(-50%);
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
                 align-items: center;
-                width: 90%;
-                gap: 10px;
+                width: 100%;
+                gap: 8px;
             }
 
             .interior {
-                font-size: 25px; 
-                margin-right: 5px;
+                font-size: 28px;
+                margin-right: 6px;
             }
 
             .divider {
-                height: 20px;
+                height: 18px;
                 margin: 0 6px;
             }
 
             .menu-link {
-                font-size: 14px; 
+                font-size: 15px;
                 margin: 0 6px;
             }
 
@@ -111,21 +112,20 @@
                 position: absolute;
                 top: 0;
                 right: 0;
-                width: 55vw;      
+                width: 80vw;     
                 max-width: none;
-                height: auto;
-                opacity: 0.9;      
+                opacity: 0.95;
             }
         }
 
         @media (max-width: 450px) {
 
             .top-left-menu {
-                top: 42vh;
+                top: 48vh;
             }
 
             .top-right-image {
-                width: 65vw;   
+                width: 90vw;  
             }
         }
     </style>
@@ -141,10 +141,7 @@
     <a href="mailto:interiorlabel@proton.me" class="menu-link">CONTACT</a>
 </div>
 
-    <img src="introimg.jpg" class="top-right-image" alt="Interior">
+<img src="introimg.jpg" class="top-right-image" alt="Interior">
 
 </body>
 </html>
-
-
-
