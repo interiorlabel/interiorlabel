@@ -80,20 +80,19 @@
 
             .top-left-menu {
                 position: absolute;
-                top: 42vh;                 
+                top: 40vh;
                 left: 50%;
                 transform: translateX(-50%);
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
                 align-items: center;
-                gap: 12px;                
                 width: 90%;
-                font-size: 14px;         
+                gap: 10px;
             }
 
             .interior {
-                font-size: 25px;           
+                font-size: 25px; 
                 margin-right: 5px;
             }
 
@@ -103,46 +102,49 @@
             }
 
             .menu-link {
-                font-size: 14px;          
+                font-size: 14px; 
                 margin: 0 6px;
             }
 
-  
             .top-right-image {
-                display: none;
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 55vw;      
+                max-width: none;
+                height: auto;
+                opacity: 0.9;      
             }
         }
 
         @media (max-width: 450px) {
 
             .top-left-menu {
-                top: 45vh;
+                top: 42vh;
             }
 
-            .interior {
-                font-size: 25px; 
-            }
-
-            .menu-link {
-                font-size: 14px; 
+            .top-right-image {
+                width: 65vw;   
             }
         }
     </style>
 </head>
 
 <body>
+    
+<div class="top-left-menu">
+    <span class="interior">INTERIØR</span>
+    <div class="divider"></div>
+    <a href="about.html" class="menu-link">ABOUT</a>
+    <a href="releases.html" class="menu-link">RELEASES</a>
+    <a href="mailto:interiorlabel@proton.me" class="menu-link">CONTACT</a>
+</div>
 
-    <div class="top-left-menu">
-        <a href="index.html" class="interior">INTERIØR</a>
-        <div class="divider"></div>
-        <a href="about.html" class="menu-link">ABOUT</a>
-        <a href="releases.html" class="menu-link">RELEASES</a>
-        <a href="mailto:interiorlabel@proton.me" class="menu-link">CONTACT</a>
-    </div>
-
-    <img src="introimg.jpg" alt="Interior" class="top-right-image">
+    <img src="introimg.jpg" class="top-right-image" alt="Interior">
 
 </body>
 </html>
+
 
 
