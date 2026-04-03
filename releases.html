@@ -20,7 +20,7 @@
             padding: 0;
             background-color: #000000;
             font-family: Baskerville, "Times New Roman", serif;
-            color: #5a5a5a;
+            color: #8a8a8a; /* lighter */
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -31,11 +31,11 @@
         }
 
         a {
-            color: #5a5a5a;
+            color: #8a8a8a;
             text-decoration: none;
         }
 
-        a:hover { color: #d0d0d0; }
+        a:hover { color: #e0e0e0; }
 
         .nav {
             position: fixed;
@@ -49,16 +49,16 @@
 
         .back-arrow {
             font-size: 18px;
-            color: #4a4a4a;
+            color: #7a7a7a;
         }
 
-     .bandcamp-link {
-    font-size: 12px;
-    color: #4a4a4a;
-    border-bottom: 1px solid #2a2a2a;
-    font-family: "EK Grotesk", sans-serif;
-    text-transform: uppercase;
-}
+        .bandcamp-link {
+            font-size: 12px;
+            color: #7a7a7a;
+            border-bottom: 1px solid #3a3a3a;
+            font-family: "EK Grotesk", sans-serif;
+            text-transform: uppercase;
+        }
 
         .container {
             display: flex;
@@ -71,13 +71,13 @@
 
         .release-label {
             font-size: 10px;
-            color: #333;
+            color: #555;
             margin-bottom: 6px;
         }
 
         .release-title {
-            font-size: 20px; /* bigger */
-            color: #6a6a6a;
+            font-size: 20px;
+            color: #b0b0b0;
             margin-bottom: 52px;
         }
 
@@ -93,20 +93,19 @@
             align-items: center;
             justify-content: space-between;
             padding: 14px 0;
-            border-top: 1px solid #111;
+            border-top: 1px solid #1a1a1a;
             cursor: pointer;
-            color: #5a5a5a;
+            color: #9a9a9a;
         }
 
         .track-item:last-child {
-            border-bottom: 1px solid #111;
+            border-bottom: 1px solid #1a1a1a;
         }
 
         .track-item:hover {
-            color: #c8c8c8;
+            color: #ffffff;
         }
 
-        /* disabled tracks */
         .track-item.disabled {
             opacity: 0.3;
             cursor: default;
@@ -121,65 +120,32 @@
 
         .track-number {
             font-size: 11px;
-            color: #2e2e2e;
-            min-width: 18px;
-            text-align: right;
+            color: #555;
         }
 
         .track-name {
             font-size: 15px;
         }
 
-        .play-icon-wrap {
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         .play-icon {
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 5px 0 5px 9px;
-            border-color: transparent transparent transparent #3e3e3e;
-        }
-
-        .pause-wrap {
-            display: none;
-            gap: 3px;
+            border-color: transparent transparent transparent #8a8a8a;
         }
 
         .pause-bar {
-            width: 3px;
-            height: 11px;
-            background: #3e3e3e;
+            background: #8a8a8a;
         }
-
-        .track-item.playing .play-icon { display: none; }
-        .track-item.playing .pause-wrap { display: flex; }
 
         .progress-bar-wrap {
-            width: 100%;
-            height: 1px;
-            background: #111;
-            display: none;
-        }
-
-        .progress-bar-wrap.visible {
-            display: block;
+            background: #1a1a1a;
         }
 
         .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: #3a3a3a;
+            background: #888;
         }
 
         .description {
-            font-size: 15px; /* bigger */
-            color: #333;
+            font-size: 15px;
+            color: #666;
             line-height: 1.8;
         }
 
@@ -187,101 +153,89 @@
 </head>
 <body>
 
-    <nav class="nav">
-        <a href="index.html" class="back-arrow">←</a>
-        <a href="https://interiorr.bandcamp.com/" class="bandcamp-link" target="_blank">Bandcamp</a>
-    </nav>
+<nav class="nav">
+    <a href="index.html" class="back-arrow">←</a>
+    <a href="https://interiorr.bandcamp.com/" class="bandcamp-link" target="_blank">Bandcamp</a>
+</nav>
 
-    <div class="container">
+<div class="container">
 
-        <div class="release-label">Protocol</div>
-        <div class="release-title">Channel Zero</div>
+    <div class="release-label">Protocol</div>
+    <div class="release-title">Channel Zero</div>
 
-        <div class="track-list">
+    <div class="track-list">
 
-            <!-- ONLY PLAYABLE -->
-            <div class="track-item" onclick="playAudio('audio/Lost Signal (noise).mp3', this)" data-index="0">
-                <div class="track-left">
-                    <span class="track-number">01</span>
-                    <span class="track-name">Lost Signal (Noise)</span>
-                </div>
-                <div class="play-icon-wrap">
-                    <div class="play-icon"></div>
-                    <div class="pause-wrap">
-                        <div class="pause-bar"></div>
-                        <div class="pause-bar"></div>
-                    </div>
+        <div class="track-item" onclick="playAudio('audio/Lost Signal (noise).mp3', this)">
+            <div class="track-left">
+                <span class="track-number">01</span>
+                <span class="track-name">Lost Signal (Noise)</span>
+            </div>
+            <div class="play-icon-wrap">
+                <div class="play-icon"></div>
+                <div class="pause-wrap">
+                    <div class="pause-bar"></div>
+                    <div class="pause-bar"></div>
                 </div>
             </div>
-            <div class="progress-bar-wrap" id="progress-0"><div class="progress-bar-fill" id="fill-0"></div></div>
-
-            <!-- DISABLED -->
-            <div class="track-item disabled">
-                <div class="track-left">
-                    <span class="track-number">02</span>
-                    <span class="track-name">Blind Belief</span>
-                </div>
-            </div>
-
-            <div class="track-item disabled">
-                <div class="track-left">
-                    <span class="track-number">03</span>
-                    <span class="track-name">Electromagnetic Shadow</span>
-                </div>
-            </div>
-
-            <div class="track-item disabled">
-                <div class="track-left">
-                    <span class="track-number">04</span>
-                    <span class="track-name">Black Snow Cult</span>
-                </div>
-            </div>
-
         </div>
 
-        <div class="description">
-            Live hardware recordings · London · 2026<br>
-            Mastered by Manmade Mastering, Berlin<br>
-            Limited to 150 copies on vinyl
+        <div class="progress-bar-wrap" id="progress-0">
+            <div class="progress-bar-fill" id="fill-0"></div>
         </div>
 
     </div>
 
-    <script>
-        const audio = new Audio('audio/Lost Signal (noise).mp3');
-        let playing = false;
-        let progressInterval;
+    <div class="description">
+        Live hardware recordings · London · 2026<br>
+        Mastered by Manmade Mastering, Berlin<br>
+        Limited to 150 copies on vinyl
+    </div>
 
-        function playAudio(track, element) {
-            if (!playing) {
-                audio.play();
-                element.classList.add('playing');
-                document.getElementById('progress-0').classList.add('visible');
+</div>
 
-                progressInterval = setInterval(() => {
-                    if (!audio.duration) return;
-                    const pct = (audio.currentTime / audio.duration) * 100;
-                    document.getElementById('fill-0').style.width = pct + '%';
-                }, 500);
+<script>
+let audio = new Audio();
+let playing = false;
+let progressInterval;
 
-                playing = true;
-            } else {
-                audio.pause();
-                element.classList.remove('playing');
-                document.getElementById('progress-0').classList.remove('visible');
-                clearInterval(progressInterval);
-                playing = false;
-            }
+function playAudio(track, element) {
 
-            audio.onended = () => {
-                element.classList.remove('playing');
-                document.getElementById('progress-0').classList.remove('visible');
-                document.getElementById('fill-0').style.width = '0%';
-                clearInterval(progressInterval);
-                playing = false;
-            };
-        }
-    </script>
+    const encodedPath = encodeURI(track);
+
+    if (!playing) {
+        audio.src = encodedPath;
+        audio.currentTime = 0;
+
+        audio.play();
+
+        element.classList.add('playing');
+        document.getElementById('progress-0').classList.add('visible');
+
+        progressInterval = setInterval(() => {
+            if (!audio.duration) return;
+            const pct = (audio.currentTime / audio.duration) * 100;
+            document.getElementById('fill-0').style.width = pct + '%';
+        }, 300);
+
+        playing = true;
+
+    } else {
+        audio.pause();
+        element.classList.remove('playing');
+        document.getElementById('progress-0').classList.remove('visible');
+        clearInterval(progressInterval);
+        playing = false;
+    }
+
+    audio.onended = () => {
+        element.classList.remove('playing');
+        document.getElementById('progress-0').classList.remove('visible');
+        document.getElementById('fill-0').style.width = '0%';
+        clearInterval(progressInterval);
+        playing = false;
+    };
+}
+</script>
 
 </body>
 </html>
