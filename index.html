@@ -13,6 +13,7 @@
         font-style: normal;
         font-display: swap;
     }
+
     body {
         margin: 0;
         padding: 0;
@@ -21,6 +22,7 @@
         color: #b9b9b9;
         min-height: 100vh;
         overflow-x: hidden;
+        transition: filter 0.4s ease;
     }
 
     @keyframes fadeIn {
@@ -28,7 +30,6 @@
         to { opacity: 1; }
     }
 
-    /* Centered overlay menu — same on desktop and mobile */
     .top-left-menu {
         position: fixed;
         top: 50%;
@@ -48,8 +49,8 @@
 
     .logo-img {
         height: 100px;
-        pointer-events: none;
         user-select: none;
+        cursor: pointer;
     }
 
     .menu-links-row {
@@ -91,7 +92,10 @@
         user-select: none;
     }
 
-    /* Mobile adjustments */
+    body:has(.logo-img:hover) {
+        filter: invert(1);
+    }
+
     @media (max-width: 768px) {
         .logo-img {
             height: 90px;
