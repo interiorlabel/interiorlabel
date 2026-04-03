@@ -5,22 +5,10 @@
     <link rel="icon" type="image/jpeg" href="favicon.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        @font-face {
-            font-family: 'ES Allianz TRIAL';
-            src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes progressPulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.9; }
         }
 
         *, *::before, *::after {
@@ -30,8 +18,8 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #080808;
-            font-family: 'ES Allianz TRIAL', 'Helvetica Neue', Helvetica, sans-serif;
+            background-color: #000000;
+            font-family: Baskerville, "Times New Roman", serif;
             color: #5a5a5a;
             min-height: 100vh;
             display: flex;
@@ -66,26 +54,15 @@
 
         .back-arrow {
             font-size: 18px;
-            line-height: 1;
             color: #4a4a4a;
-            transition: color 0.25s ease;
         }
-
-        .back-arrow:hover { color: #d0d0d0; }
 
         .bandcamp-link {
             font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.08em;
             color: #4a4a4a;
             border-bottom: 1px solid #2a2a2a;
             padding-bottom: 1px;
-            transition: color 0.25s ease, border-color 0.25s ease;
-        }
-
-        .bandcamp-link:hover {
-            color: #d0d0d0;
-            border-color: #5a5a5a;
         }
 
         /* Container */
@@ -98,21 +75,9 @@
             padding: 100px 32px 60px;
         }
 
-        /* Cover image */
-        .cover-img {
-            width: 130px;
-            height: 130px;
-            object-fit: cover;
-            opacity: 0.75;
-            margin-bottom: 24px;
-            filter: grayscale(20%);
-        }
-
         /* Label + release info */
         .release-label {
             font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.18em;
             color: #333;
             margin-bottom: 6px;
         }
@@ -121,7 +86,7 @@
             font-size: 13px;
             color: #6a6a6a;
             margin-bottom: 52px;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.04em;
         }
 
         /* Divider */
@@ -130,7 +95,6 @@
             height: 28px;
             background: #1e1e1e;
             margin-bottom: 52px;
-            align-self: center;
         }
 
         /* Track list */
@@ -148,7 +112,6 @@
             padding: 14px 0;
             border-top: 1px solid #111;
             cursor: pointer;
-            transition: color 0.2s ease;
             color: #5a5a5a;
         }
 
@@ -160,14 +123,6 @@
             color: #c8c8c8;
         }
 
-        .track-item:hover .play-icon {
-            border-left-color: #c8c8c8;
-        }
-
-        .track-item:hover .pause-bar {
-            background: #c8c8c8;
-        }
-
         .track-left {
             display: flex;
             align-items: center;
@@ -177,14 +132,12 @@
         .track-number {
             font-size: 10px;
             color: #2e2e2e;
-            letter-spacing: 0.1em;
             min-width: 18px;
             text-align: right;
         }
 
         .track-name {
             font-size: 13px;
-            letter-spacing: 0.04em;
         }
 
         /* Play / pause icon */
@@ -194,7 +147,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
         }
 
         .play-icon {
@@ -203,8 +155,6 @@
             border-style: solid;
             border-width: 5px 0 5px 9px;
             border-color: transparent transparent transparent #3e3e3e;
-            transition: border-color 0.2s ease;
-            margin-left: 2px;
         }
 
         .pause-wrap {
@@ -217,23 +167,16 @@
             width: 3px;
             height: 11px;
             background: #3e3e3e;
-            transition: background 0.2s ease;
         }
 
         .track-item.playing .play-icon { display: none; }
         .track-item.playing .pause-wrap { display: flex; }
-        .track-item.playing .track-number { color: #5a5a5a; }
-        .track-item.playing { color: #c8c8c8; }
-        .track-item.playing .pause-bar { background: #c8c8c8; }
 
         /* Progress bar */
         .progress-bar-wrap {
             width: 100%;
             height: 1px;
             background: #111;
-            margin-top: -1px;
-            position: relative;
-            overflow: hidden;
             display: none;
         }
 
@@ -245,37 +188,16 @@
             height: 100%;
             width: 0%;
             background: #3a3a3a;
-            transition: width 0.5s linear;
         }
 
         /* Description */
         .description {
             font-size: 11px;
             color: #333;
-            line-height: 2;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
+            line-height: 1.8;
+            letter-spacing: 0.04em;
         }
 
-        /* Mobile */
-        @media (max-width: 600px) {
-            .container {
-                padding: 90px 24px 50px;
-            }
-
-            .cover-img {
-                width: 110px;
-                height: 110px;
-            }
-
-            .track-name {
-                font-size: 13px;
-            }
-
-            .description {
-                font-size: 10px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -287,10 +209,8 @@
 
     <div class="container">
 
-        <img src="title2.jpeg" class="cover-img" alt="INTERIØR">
-
         <div class="release-label">Protocol</div>
-        <div class="release-title">INTERIØR</div>
+        <div class="release-title">Interiør</div>
 
         <div class="track-list" id="trackList">
 
@@ -357,8 +277,8 @@
         </div>
 
         <div class="description">
-            Live hardware recordings &nbsp;·&nbsp; London<br>
-            150 copies on vinyl &nbsp;·&nbsp; March 2026<br>
+            Live hardware recordings · London<br>
+            150 copies on vinyl · March 2026<br>
             Felipe Pinto
         </div>
 
@@ -380,7 +300,6 @@
         });
 
         let currentTrack = null;
-        let currentElement = null;
         let progressInterval = null;
 
         function clearAll() {
@@ -411,25 +330,20 @@
             if (audio.paused) {
                 audio.play();
                 element.classList.add('playing');
-                const progressWrap = document.getElementById('progress-' + index);
-                if (progressWrap) progressWrap.classList.add('visible');
+                document.getElementById('progress-' + index).classList.add('visible');
                 updateProgress(audio, index);
                 currentTrack = audio;
-                currentElement = element;
             } else {
                 audio.pause();
                 element.classList.remove('playing');
-                const progressWrap = document.getElementById('progress-' + index);
-                if (progressWrap) progressWrap.classList.remove('visible');
+                document.getElementById('progress-' + index).classList.remove('visible');
                 if (progressInterval) clearInterval(progressInterval);
                 currentTrack = null;
-                currentElement = null;
             }
 
             audio.onended = () => {
                 clearAll();
                 currentTrack = null;
-                currentElement = null;
             };
         }
     </script>
