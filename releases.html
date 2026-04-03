@@ -28,18 +28,15 @@
             text-align: center;
             opacity: 0;
             animation: fadeIn 0.8s ease-out forwards;
-            letter-spacing: 0.03em;
         }
 
         a {
             color: #5a5a5a;
             text-decoration: none;
-            transition: color 0.25s ease;
         }
 
         a:hover { color: #d0d0d0; }
 
-        /* Nav */
         .nav {
             position: fixed;
             top: 0;
@@ -47,9 +44,7 @@
             right: 0;
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 28px 28px;
-            z-index: 100;
         }
 
         .back-arrow {
@@ -59,13 +54,10 @@
 
         .bandcamp-link {
             font-size: 11px;
-            letter-spacing: 0.08em;
             color: #4a4a4a;
             border-bottom: 1px solid #2a2a2a;
-            padding-bottom: 1px;
         }
 
-        /* Container */
         .container {
             display: flex;
             flex-direction: column;
@@ -75,7 +67,6 @@
             padding: 100px 32px 60px;
         }
 
-        /* Label + release info */
         .release-label {
             font-size: 10px;
             color: #333;
@@ -83,21 +74,11 @@
         }
 
         .release-title {
-            font-size: 13px;
+            font-size: 20px; /* bigger */
             color: #6a6a6a;
             margin-bottom: 52px;
-            letter-spacing: 0.04em;
         }
 
-        /* Divider */
-        .divider {
-            width: 1px;
-            height: 28px;
-            background: #1e1e1e;
-            margin-bottom: 52px;
-        }
-
-        /* Track list */
         .track-list {
             display: flex;
             flex-direction: column;
@@ -123,6 +104,13 @@
             color: #c8c8c8;
         }
 
+        /* disabled tracks */
+        .track-item.disabled {
+            opacity: 0.3;
+            cursor: default;
+            pointer-events: none;
+        }
+
         .track-left {
             display: flex;
             align-items: center;
@@ -140,7 +128,6 @@
             font-size: 13px;
         }
 
-        /* Play / pause icon */
         .play-icon-wrap {
             width: 20px;
             height: 20px;
@@ -159,7 +146,6 @@
 
         .pause-wrap {
             display: none;
-            align-items: center;
             gap: 3px;
         }
 
@@ -172,7 +158,6 @@
         .track-item.playing .play-icon { display: none; }
         .track-item.playing .pause-wrap { display: flex; }
 
-        /* Progress bar */
         .progress-bar-wrap {
             width: 100%;
             height: 1px;
@@ -190,12 +175,10 @@
             background: #3a3a3a;
         }
 
-        /* Description */
         .description {
-            font-size: 11px;
+            font-size: 15px; /* bigger */
             color: #333;
             line-height: 1.8;
-            letter-spacing: 0.04em;
         }
 
     </style>
@@ -212,8 +195,9 @@
         <div class="release-label">Protocol</div>
         <div class="release-title">Interiør</div>
 
-        <div class="track-list" id="trackList">
+        <div class="track-list">
 
+            <!-- ONLY PLAYABLE -->
             <div class="track-item" onclick="playAudio('audio/Untitled291.mp3', this)" data-index="0">
                 <div class="track-left">
                     <span class="track-number">01</span>
@@ -229,50 +213,27 @@
             </div>
             <div class="progress-bar-wrap" id="progress-0"><div class="progress-bar-fill" id="fill-0"></div></div>
 
-            <div class="track-item" onclick="playAudio('audio/Untitled292.mp3', this)" data-index="1">
+            <!-- DISABLED -->
+            <div class="track-item disabled">
                 <div class="track-left">
                     <span class="track-number">02</span>
                     <span class="track-name">Untitled 292</span>
                 </div>
-                <div class="play-icon-wrap">
-                    <div class="play-icon"></div>
-                    <div class="pause-wrap">
-                        <div class="pause-bar"></div>
-                        <div class="pause-bar"></div>
-                    </div>
-                </div>
             </div>
-            <div class="progress-bar-wrap" id="progress-1"><div class="progress-bar-fill" id="fill-1"></div></div>
 
-            <div class="track-item" onclick="playAudio('audio/Untitled293.mp3', this)" data-index="2">
+            <div class="track-item disabled">
                 <div class="track-left">
                     <span class="track-number">03</span>
                     <span class="track-name">Untitled 293</span>
                 </div>
-                <div class="play-icon-wrap">
-                    <div class="play-icon"></div>
-                    <div class="pause-wrap">
-                        <div class="pause-bar"></div>
-                        <div class="pause-bar"></div>
-                    </div>
-                </div>
             </div>
-            <div class="progress-bar-wrap" id="progress-2"><div class="progress-bar-fill" id="fill-2"></div></div>
 
-            <div class="track-item" onclick="playAudio('audio/Untitled294.mp3', this)" data-index="3">
+            <div class="track-item disabled">
                 <div class="track-left">
                     <span class="track-number">04</span>
                     <span class="track-name">Untitled 294</span>
                 </div>
-                <div class="play-icon-wrap">
-                    <div class="play-icon"></div>
-                    <div class="pause-wrap">
-                        <div class="pause-bar"></div>
-                        <div class="pause-bar"></div>
-                    </div>
-                </div>
             </div>
-            <div class="progress-bar-wrap" id="progress-3"><div class="progress-bar-fill" id="fill-3"></div></div>
 
         </div>
 
@@ -285,65 +246,37 @@
     </div>
 
     <script>
-        const audioPlayers = {};
-        const trackFiles = [
-            'audio/Untitled291.mp3',
-            'audio/Untitled292.mp3',
-            'audio/Untitled293.mp3',
-            'audio/Untitled294.mp3'
-        ];
-
-        trackFiles.forEach((track, i) => {
-            const audio = new Audio(track);
-            audio.preload = "auto";
-            audioPlayers[track] = { audio, index: i };
-        });
-
-        let currentTrack = null;
-        let progressInterval = null;
-
-        function clearAll() {
-            document.querySelectorAll('.track-item').forEach(el => el.classList.remove('playing'));
-            document.querySelectorAll('.progress-bar-wrap').forEach(el => el.classList.remove('visible'));
-            document.querySelectorAll('.progress-bar-fill').forEach(el => el.style.width = '0%');
-            if (progressInterval) clearInterval(progressInterval);
-        }
-
-        function updateProgress(audio, index) {
-            if (progressInterval) clearInterval(progressInterval);
-            progressInterval = setInterval(() => {
-                if (!audio.duration) return;
-                const pct = (audio.currentTime / audio.duration) * 100;
-                const fill = document.getElementById('fill-' + index);
-                if (fill) fill.style.width = pct + '%';
-            }, 500);
-        }
+        const audio = new Audio('audio/Untitled291.mp3');
+        let playing = false;
+        let progressInterval;
 
         function playAudio(track, element) {
-            const { audio, index } = audioPlayers[track];
-
-            if (currentTrack && currentTrack !== audio) {
-                currentTrack.pause();
-                clearAll();
-            }
-
-            if (audio.paused) {
+            if (!playing) {
                 audio.play();
                 element.classList.add('playing');
-                document.getElementById('progress-' + index).classList.add('visible');
-                updateProgress(audio, index);
-                currentTrack = audio;
+                document.getElementById('progress-0').classList.add('visible');
+
+                progressInterval = setInterval(() => {
+                    if (!audio.duration) return;
+                    const pct = (audio.currentTime / audio.duration) * 100;
+                    document.getElementById('fill-0').style.width = pct + '%';
+                }, 500);
+
+                playing = true;
             } else {
                 audio.pause();
                 element.classList.remove('playing');
-                document.getElementById('progress-' + index).classList.remove('visible');
-                if (progressInterval) clearInterval(progressInterval);
-                currentTrack = null;
+                document.getElementById('progress-0').classList.remove('visible');
+                clearInterval(progressInterval);
+                playing = false;
             }
 
             audio.onended = () => {
-                clearAll();
-                currentTrack = null;
+                element.classList.remove('playing');
+                document.getElementById('progress-0').classList.remove('visible');
+                document.getElementById('fill-0').style.width = '0%';
+                clearInterval(progressInterval);
+                playing = false;
             };
         }
     </script>
