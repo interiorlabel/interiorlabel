@@ -20,7 +20,7 @@
             padding: 0;
             background-color: #000000;
             font-family: Baskerville, "Times New Roman", serif;
-            color: #7a7a7a; /* lighter */
+            color: #7a7a7a;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -88,6 +88,7 @@
             margin-bottom: 52px;
         }
 
+        /* === RELEASED TRACK (01) === */
         .track-item {
             display: flex;
             align-items: center;
@@ -96,6 +97,7 @@
             border-top: 1px solid #1a1a1a;
             cursor: pointer;
             color: #8a8a8a;
+            transition: color 0.2s;
         }
 
         .track-item:last-child {
@@ -106,21 +108,95 @@
             color: #ffffff;
         }
 
+        /* === UNRELEASED TRACKS (02–04) === */
+        .track-item.unreleased {
+            cursor: default;
+            color: #3a3a3a;
+        }
+
+        .track-item.unreleased:hover {
+            color: #3a3a3a;
+        }
+
+        .track-item.unreleased .track-number {
+            color: #2e2e2e;
+        }
+
+        /* === SHARED TRACK STYLES === */
+        .track-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
         .track-number {
             font-size: 11px;
             color: #555;
         }
 
+        .track-name {
+            font-size: 14px;
+        }
+
+        /* Play/pause icon */
+        .play-icon-wrap {
+            position: relative;
+            width: 10px;
+            height: 12px;
+            flex-shrink: 0;
+        }
+
         .play-icon {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 6px 0 6px 10px;
             border-color: transparent transparent transparent #8a8a8a;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.2s;
+        }
+
+        .pause-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            gap: 3px;
+            opacity: 0;
+            transition: opacity 0.2s;
         }
 
         .pause-bar {
+            width: 3px;
+            height: 12px;
             background: #8a8a8a;
         }
 
+        /* Playing state */
+        .track-item.playing .play-icon { opacity: 0; }
+        .track-item.playing .pause-wrap { opacity: 1; }
+
+        /* Progress bar */
+        .progress-bar-wrap {
+            width: 100%;
+            height: 1px;
+            background: #1a1a1a;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+        }
+
+        .progress-bar-wrap.visible {
+            max-height: 1px;
+        }
+
         .progress-bar-fill {
+            height: 100%;
+            width: 0%;
             background: #9a9a9a;
+            transition: width 0.4s linear;
         }
 
         .description {
@@ -145,7 +221,8 @@
 
     <div class="track-list">
 
-        <div class="track-item" onclick="playAudio('audio/Lost Signal (noise).mp3', this)" data-index="0">
+        <!-- Track 01 — released, playable -->
+        <div class="track-item" onclick="playAudio('audio/lost-signal-noise.mp3', this)" data-index="0">
             <div class="track-left">
                 <span class="track-number">01</span>
                 <span class="track-name">Lost Signal (Noise)</span>
@@ -160,21 +237,22 @@
         </div>
         <div class="progress-bar-wrap" id="progress-0"><div class="progress-bar-fill" id="fill-0"></div></div>
 
-        <div class="track-item disabled">
+        <!-- Tracks 02–04 — unreleased, not interactive -->
+        <div class="track-item unreleased">
             <div class="track-left">
                 <span class="track-number">02</span>
                 <span class="track-name">Blind Belief</span>
             </div>
         </div>
 
-        <div class="track-item disabled">
+        <div class="track-item unreleased">
             <div class="track-left">
                 <span class="track-number">03</span>
                 <span class="track-name">Electromagnetic Shadow</span>
             </div>
         </div>
 
-        <div class="track-item disabled">
+        <div class="track-item unreleased">
             <div class="track-left">
                 <span class="track-number">04</span>
                 <span class="track-name">Black Snow Cult</span>
@@ -197,11 +275,8 @@ let playing = false;
 let progressInterval;
 
 function playAudio(track, element) {
-
-    const encoded = encodeURI(track);
-
     if (!playing) {
-        audio.src = encoded;
+        audio.src = track;
         audio.currentTime = 0;
         audio.play();
 
