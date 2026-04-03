@@ -13,222 +13,153 @@
         font-style: normal;
         font-display: swap;
     }
-
-    *, *::before, *::after {
-        box-sizing: border-box;
-    }
-
     body {
         margin: 0;
         padding: 0;
-        background-color: #000000;
-        font-family: 'ES Allianz TRIAL', sans-serif;
-        color: #a8a8a8;
+        background-color: black;
+        font-family: 'ES Allianz TRIAL';
+        color: 
+#b9b9b9;
         min-height: 100vh;
         overflow-x: hidden;
     }
 
-    /* Subtle grain overlay */
-    body::after {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-        opacity: 0.03;
-        pointer-events: none;
-        z-index: 100;
-    }
-
     @keyframes fadeIn {
-        from { opacity: 0; }
-        to   { opacity: 1; }
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
 
-    @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(8px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── Image ── */
-    .top-right-image {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 46vw;
-        max-width: 660px;
-        height: 100vh;
-        object-fit: cover;
-        z-index: 1;
-        opacity: 0;
-        animation: fadeIn 1.2s ease forwards;
-    }
-
-    /* Gradient fade on the left edge of the image */
-    .top-right-image-fade {
-        position: fixed;
-        top: 0;
-        right: 46vw;
-        max-right: calc(100vw - 660px);
-        width: 180px;
-        height: 100vh;
-        background: linear-gradient(to right, #000000 0%, transparent 100%);
-        z-index: 2;
-        pointer-events: none;
-        opacity: 0;
-        animation: fadeIn 1.4s ease 0.3s forwards;
-    }
-
-    /* ── Nav ── */
     .top-left-menu {
-        position: fixed;
-        top: 28px;
+        position: absolute;
+        top: 20px;
         left: 40px;
         display: flex;
-        flex-direction: row;
         align-items: center;
+        font-size: 14px;
         z-index: 10;
         opacity: 0;
-        animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+        animation: fadeIn 0.8s ease-in 0.8s forwards;
     }
 
-    .logo-wrap {
-        display: flex;
-        align-items: center;
+    .top-right-image {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 45vw;
+        max-width: 650px;
+        height: auto;
+        z-index: 1;
+        object-fit: cover;
+        opacity: 0;
+        animation: fadeIn 0.8s ease-in forwards; 
     }
 
     .logo-img {
-        height: 60px;
+        height: 70px;
         pointer-events: none;
         user-select: none;
+    }
+    .divider {
         display: block;
+        width: 1px;
+        height: 25px;
+        background-color: 
+#b9b9b9;
+        margin: 15px;
     }
-
-    .nav-bottom {
-        display: flex;
-        align-items: center;
-        gap: 0;
+    .divider-small {
+        display: none;
     }
-
     .menu-link {
         cursor: pointer;
         text-decoration: none;
-        color: #787878;
-        font-size: 11px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        padding: 4px 0;
-        position: relative;
-        transition: color 0.3s ease;
+        color: 
+#b9b9b9;
+        font-size: 14px;
+        margin: 0 12px;
     }
-
-    .menu-link::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background: #a8a8a8;
-        transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
     .menu-link:hover {
-        color: #c8c8c8;
+        opacity: 0.7;
     }
 
-    .menu-link:hover::after {
-        width: 100%;
-    }
-
-    .nav-divider {
-        width: 1px;
-        height: 14px;
-        background: #2e2e2e;
-        margin: 0 22px;
-        flex-shrink: 0;
-    }
-
-    .outer-divider {
-        height: 26px;
-        background: #3a3a3a;
-        margin: 0 28px;
-    }
-
-    /* ── Mobile ── */
     @media (max-width: 768px) {
         .top-right-image {
-            position: fixed;
             width: 100vw;
-            height: 100vh;
+            height: 50vh;
+            object-fit: cover;
             left: 0;
             top: 0;
         }
-
-        .top-right-image-fade {
-            display: none;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.62);
-            z-index: 3;
-            pointer-events: none;
-        }
-
         .top-left-menu {
-            position: fixed;
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 20px;
-            z-index: 10;
+            width: 100%;
+            text-align: center;
+            gap: 18px;
         }
-
-        .outer-divider {
-            display: none;
+        .divider, .menu-links-row {
+        opacity: 0;
+        animation: fadeIn 0.8s ease-in 1s forwards;
         }
 
         .logo-img {
             height: 90px;
         }
-
-        .nav-bottom {
-            justify-content: center;
+        .divider {
+            display: none;
         }
-
+        .menu-links-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            font-size: 16px;
+        }
         .menu-link {
-            font-size: 13px;
-            letter-spacing: 0.15em;
-            color: #909090;
+            margin: 0;
+            font-size: 16px;
+        }
+        .divider-small {
+            display: inline;
+            color: 
+#b9b9b9;
+            font-size: 16px;
+            opacity: 0.8;
+            user-select: none;
         }
     }
-
-    @media (max-width: 420px) {
-        .nav-divider {
-            margin: 0 16px;
+    @media (max-width: 450px) {
+        .top-right-image {
+            height: 53vh;
+        }
+        .top-left-menu {
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
     }
-    </style>
+</style>
 </head>
 <body>
-
-    <img src="introimg.jpg" class="top-right-image" alt="Interior">
-    <div class="top-right-image-fade"></div>
-
     <div class="top-left-menu">
-        <div class="logo-wrap">
-            <img src="title.jpeg" class="logo-img" alt="INTERIØR">
+        <img src="title.jpeg" class="logo-img" alt="INTERIØR">
+        <div class="divider"></div>
+        <div class="menu-links-row">
+            <a href="about.html" class="menu-link">ABOUT</a>
+            <span class="divider-small">I</span>
+            <a href="releases.html" class="menu-link">RELEASES</a>
+            <span class="divider-small">I</span>
+            <a href="mailto:interiorlabel@proton.me" class="menu-link">CONTACT</a>
         </div>
-
-        <div class="nav-divider outer-divider"></div>
-
-        <nav class="nav-bottom">
-            <a href="about.html" class="menu-link">About</a>
-            <div class="nav-divider"></div>
-            <a href="releases.html" class="menu-link">Releases</a>
-            <div class="nav-divider"></div>
-            <a href="/cdn-cgi/l/email-protection#5831362c3d2a31372a34393a3d3418282a372c373676353d" class="menu-link">Contact</
+    </div>
+    <img src="introimg.jpg" class="top-right-image" alt="Interior">
+</body>
+</html>
