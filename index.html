@@ -22,7 +22,12 @@
         color: #b9b9b9;
         min-height: 100vh;
         overflow-x: hidden;
-        transition: background-color 0.4s ease, color 0.4s ease;
+        transition: background-color 0.5s ease;
+    }
+
+    /* When body has the hover class, go white */
+    body.logo-hovered {
+        background-color: white;
     }
 
     @keyframes fadeIn {
@@ -51,7 +56,12 @@
         height: 100px;
         user-select: none;
         cursor: pointer;
-        transition: filter 0.4s ease;
+        transition: filter 0.5s ease;
+    }
+
+    /* Invert just the logo on hover */
+    body.logo-hovered .logo-img {
+        filter: invert(1);
     }
 
     .menu-links-row {
@@ -60,6 +70,13 @@
         align-items: center;
         gap: 20px;
         font-size: 16px;
+        transition: opacity 0.4s ease;
+    }
+
+    /* Hide links on hover */
+    body.logo-hovered .menu-links-row {
+        opacity: 0;
+        pointer-events: none;
     }
 
     .menu-link {
@@ -69,7 +86,6 @@
         font-size: 16px;
         margin: 0;
         position: relative;
-        transition: color 0.4s ease;
     }
 
     .menu-link::after {
@@ -80,7 +96,7 @@
         width: 0;
         height: 1px;
         background-color: #b9b9b9;
-        transition: width 0.3s ease, background-color 0.4s ease;
+        transition: width 0.3s ease;
     }
 
     .menu-link:hover::after {
@@ -92,30 +108,6 @@
         font-size: 16px;
         opacity: 0.8;
         user-select: none;
-        transition: color 0.4s ease;
-    }
-
-    /* 🔥 REAL COLOR INVERSION (NOT FILTER) */
-    body:has(.logo-img:hover) {
-        background-color: white;
-        color: black;
-    }
-
-    body:has(.logo-img:hover) .menu-link {
-        color: black;
-    }
-
-    body:has(.logo-img:hover) .divider-small {
-        color: black;
-    }
-
-    body:has(.logo-img:hover) .menu-link::after {
-        background-color: black;
-    }
-
-    /* Invert ONLY the logo */
-    body:has(.logo-img:hover) .logo-img {
-        filter: invert(1);
     }
 
     @media (max-width: 768px) {
@@ -127,7 +119,9 @@
 </head>
 <body>
     <div class="top-left-menu">
-        <img src="interiorlogo.jpg" class="logo-img" alt="INTERIØR">
+        <img src="interiorlogo.jpg" class="logo-img" alt="INTERIØR"
+             onmouseenter="document.body.classList.add('logo-hovered')"
+             onmouseleave="document.body.classList.remove('logo-hovered')">
         <div class="menu-links-row">
             <a href="about.html" class="menu-link">ABOUT</a>
             <span class="divider-small">I</span>
