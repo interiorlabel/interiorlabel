@@ -3,9 +3,7 @@
 <head>
     <title>Protocol - Works</title>
     <link rel="icon" type="image/jpeg" href="favicon.jpg">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <style>
         @font-face {
             font-family: 'ES Allianz TRIAL';
@@ -16,228 +14,358 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes progressPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.9; }
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: black;
-            font-family: 'ES Allianz TRIAL';
-            color: grey;
+            background-color: #080808;
+            font-family: 'ES Allianz TRIAL', 'Helvetica Neue', Helvetica, sans-serif;
+            color: #5a5a5a;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             opacity: 0;
-            animation: fadeIn 0.6s ease-in forwards;
+            animation: fadeIn 0.8s ease-out forwards;
+            letter-spacing: 0.03em;
         }
 
         a {
-            color: grey;
+            color: #5a5a5a;
             text-decoration: none;
+            transition: color 0.25s ease;
+        }
+
+        a:hover { color: #d0d0d0; }
+
+        /* Nav */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 28px;
+            z-index: 100;
         }
 
         .back-arrow {
-            position: fixed;
-            top: 30px;
-            left: 20px;
-            font-size: 22px;
-            z-index: 100;
+            font-size: 18px;
+            line-height: 1;
+            color: #4a4a4a;
+            transition: color 0.25s ease;
         }
 
-        .back-arrow:hover {
-            color: #ffffff;
-        }
+        .back-arrow:hover { color: #d0d0d0; }
 
         .bandcamp-link {
-            position: fixed;
-            top: 30px;
-            right: 18px;
-            font-size: 14px;
-            text-decoration: underline;
-            z-index: 100;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #4a4a4a;
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 1px;
+            transition: color 0.25s ease, border-color 0.25s ease;
         }
 
         .bandcamp-link:hover {
-            color: #ffffff;
+            color: #d0d0d0;
+            border-color: #5a5a5a;
         }
 
+        /* Container */
         .container {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 600px;
-            padding: 20px;
+            max-width: 480px;
+            padding: 100px 32px 60px;
         }
 
-        .title-img-desktop {
-            width: 160px;
-            opacity: 0.9;
-            margin-bottom: 2px;
+        /* Cover image */
+        .cover-img {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            opacity: 0.75;
+            margin-bottom: 24px;
+            filter: grayscale(20%);
         }
 
-        .title-img-mobile {
-            display: none;
+        /* Label + release info */
+        .release-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: #333;
             margin-bottom: 6px;
         }
 
-        .by-protocol {
-            font-size: 14px;
-            color: grey;
-            margin-bottom: 45px;
+        .release-title {
+            font-size: 13px;
+            color: #6a6a6a;
+            margin-bottom: 52px;
+            letter-spacing: 0.06em;
         }
 
+        /* Divider */
+        .divider {
+            width: 1px;
+            height: 28px;
+            background: #1e1e1e;
+            margin-bottom: 52px;
+            align-self: center;
+        }
+
+        /* Track list */
         .track-list {
             display: flex;
             flex-direction: column;
-            gap: 25px; 
-            margin-bottom: 35px;
+            width: 100%;
+            margin-bottom: 52px;
         }
 
         .track-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 17px;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-top: 1px solid #111;
             cursor: pointer;
+            transition: color 0.2s ease;
+            color: #5a5a5a;
+        }
+
+        .track-item:last-child {
+            border-bottom: 1px solid #111;
         }
 
         .track-item:hover {
-            color: #ffffff;
+            color: #c8c8c8;
+        }
+
+        .track-item:hover .play-icon {
+            border-left-color: #c8c8c8;
+        }
+
+        .track-item:hover .pause-bar {
+            background: #c8c8c8;
+        }
+
+        .track-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .track-number {
+            font-size: 10px;
+            color: #2e2e2e;
+            letter-spacing: 0.1em;
+            min-width: 18px;
+            text-align: right;
+        }
+
+        .track-name {
+            font-size: 13px;
+            letter-spacing: 0.04em;
+        }
+
+        /* Play / pause icon */
+        .play-icon-wrap {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
         .play-icon {
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 7px 0 7px 12px;
-            border-color: transparent transparent transparent grey;
-            margin-right: 8px;
-            transition: 0.2s;
+            border-width: 5px 0 5px 9px;
+            border-color: transparent transparent transparent #3e3e3e;
+            transition: border-color 0.2s ease;
+            margin-left: 2px;
         }
 
-        .play-icon.pause {
-            width: 12px;
-            height: 12px;
-            border: none;
+        .pause-wrap {
+            display: none;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .pause-bar {
+            width: 3px;
+            height: 11px;
+            background: #3e3e3e;
+            transition: background 0.2s ease;
+        }
+
+        .track-item.playing .play-icon { display: none; }
+        .track-item.playing .pause-wrap { display: flex; }
+        .track-item.playing .track-number { color: #5a5a5a; }
+        .track-item.playing { color: #c8c8c8; }
+        .track-item.playing .pause-bar { background: #c8c8c8; }
+
+        /* Progress bar */
+        .progress-bar-wrap {
+            width: 100%;
+            height: 1px;
+            background: #111;
+            margin-top: -1px;
             position: relative;
+            overflow: hidden;
+            display: none;
         }
 
-        .play-icon.pause::before,
-        .play-icon.pause::after {
-            content: "";
-            position: absolute;
-            width: 4px;
-            height: 12px;
-            background: grey;
-            top: 0;
+        .progress-bar-wrap.visible {
+            display: block;
         }
 
-        .play-icon.pause::before { left: 0; }
-        .play-icon.pause::after { right: 0; }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: #3a3a3a;
+            transition: width 0.5s linear;
+        }
 
+        /* Description */
         .description {
-            font-size: 12px;
-            margin-top: 30px;
+            font-size: 11px;
+            color: #333;
+            line-height: 2;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
         }
 
-  
+        /* Mobile */
         @media (max-width: 600px) {
-
             .container {
-                padding: 20px;
+                padding: 90px 24px 50px;
             }
 
-            .title-img-desktop {
-                display: none;
+            .cover-img {
+                width: 110px;
+                height: 110px;
             }
 
-            .title-img-mobile {
-                display: block;
-                width: 35%;
-                max-width: 140px;
-                opacity: 0.9;
-                margin-bottom: 8px;
-            }
-
-            .by-protocol {
-                font-size: 14px;
-                margin-bottom: 35px;
-            }
-
-            .track-list {
-                gap: 22px;
-                margin-bottom: 25px;
-            }
-
-            .track-item {
-                font-size: 16px;
+            .track-name {
+                font-size: 13px;
             }
 
             .description {
-                font-size: 13px;
-                margin-top: 50px;
+                font-size: 10px;
             }
         }
     </style>
 </head>
-
 <body>
 
-    <a href="index.html" class="back-arrow">←</a>
-    <a href="https://interiorr.bandcamp.com/" class="bandcamp-link" target="_blank">bandcamp</a>
+    <nav class="nav">
+        <a href="index.html" class="back-arrow">←</a>
+        <a href="https://interiorr.bandcamp.com/" class="bandcamp-link" target="_blank">Bandcamp</a>
+    </nav>
 
     <div class="container">
 
-        <img src="title2.jpeg" class="title-img-desktop" alt="INTERIØR">
-        <img src="title2.jpeg" class="title-img-mobile" alt="INTERIØR">
-        
-        <div class="by-protocol">Protocol</div>
+        <img src="title2.jpeg" class="cover-img" alt="INTERIØR">
 
-        <div class="track-list">
+        <div class="release-label">Protocol</div>
+        <div class="release-title">INTERIØR</div>
 
-            <div class="track-item" onclick="playAudio('audio/Untitled291.mp3', this)">
-                <span class="play-icon"></span>
-                <span>untitled 291</span>
+        <div class="track-list" id="trackList">
+
+            <div class="track-item" onclick="playAudio('audio/Untitled291.mp3', this)" data-index="0">
+                <div class="track-left">
+                    <span class="track-number">01</span>
+                    <span class="track-name">Untitled 291</span>
+                </div>
+                <div class="play-icon-wrap">
+                    <div class="play-icon"></div>
+                    <div class="pause-wrap">
+                        <div class="pause-bar"></div>
+                        <div class="pause-bar"></div>
+                    </div>
+                </div>
             </div>
+            <div class="progress-bar-wrap" id="progress-0"><div class="progress-bar-fill" id="fill-0"></div></div>
 
-            <div class="track-item" onclick="playAudio('audio/Untitled292.mp3', this)">
-                <span class="play-icon"></span>
-                <span>untitled 292</span>
+            <div class="track-item" onclick="playAudio('audio/Untitled292.mp3', this)" data-index="1">
+                <div class="track-left">
+                    <span class="track-number">02</span>
+                    <span class="track-name">Untitled 292</span>
+                </div>
+                <div class="play-icon-wrap">
+                    <div class="play-icon"></div>
+                    <div class="pause-wrap">
+                        <div class="pause-bar"></div>
+                        <div class="pause-bar"></div>
+                    </div>
+                </div>
             </div>
+            <div class="progress-bar-wrap" id="progress-1"><div class="progress-bar-fill" id="fill-1"></div></div>
 
-            <div class="track-item" onclick="playAudio('audio/Untitled293.mp3', this)">
-                <span class="play-icon"></span>
-                <span>untitled 293</span>
+            <div class="track-item" onclick="playAudio('audio/Untitled293.mp3', this)" data-index="2">
+                <div class="track-left">
+                    <span class="track-number">03</span>
+                    <span class="track-name">Untitled 293</span>
+                </div>
+                <div class="play-icon-wrap">
+                    <div class="play-icon"></div>
+                    <div class="pause-wrap">
+                        <div class="pause-bar"></div>
+                        <div class="pause-bar"></div>
+                    </div>
+                </div>
             </div>
+            <div class="progress-bar-wrap" id="progress-2"><div class="progress-bar-fill" id="fill-2"></div></div>
 
-            <div class="track-item" onclick="playAudio('audio/Untitled294.mp3', this)">
-                <span class="play-icon"></span>
-                <span>untitled 294</span>
+            <div class="track-item" onclick="playAudio('audio/Untitled294.mp3', this)" data-index="3">
+                <div class="track-left">
+                    <span class="track-number">04</span>
+                    <span class="track-name">Untitled 294</span>
+                </div>
+                <div class="play-icon-wrap">
+                    <div class="play-icon"></div>
+                    <div class="pause-wrap">
+                        <div class="pause-bar"></div>
+                        <div class="pause-bar"></div>
+                    </div>
+                </div>
             </div>
+            <div class="progress-bar-wrap" id="progress-3"><div class="progress-bar-fill" id="fill-3"></div></div>
 
         </div>
 
         <div class="description">
-            All recordings from live hardware jams.<br>
-            150 copies on vinyl to be released in March 2026.<br>
-            Composed in London by Felipe Pinto.
+            Live hardware recordings &nbsp;·&nbsp; London<br>
+            150 copies on vinyl &nbsp;·&nbsp; March 2026<br>
+            Felipe Pinto
         </div>
 
     </div>
 
     <script>
         const audioPlayers = {};
-
         const trackFiles = [
             'audio/Untitled291.mp3',
             'audio/Untitled292.mp3',
@@ -245,33 +373,63 @@
             'audio/Untitled294.mp3'
         ];
 
-        trackFiles.forEach(track => {
+        trackFiles.forEach((track, i) => {
             const audio = new Audio(track);
             audio.preload = "auto";
-            audioPlayers[track] = audio;
+            audioPlayers[track] = { audio, index: i };
         });
 
+        let currentTrack = null;
+        let currentElement = null;
+        let progressInterval = null;
+
+        function clearAll() {
+            document.querySelectorAll('.track-item').forEach(el => el.classList.remove('playing'));
+            document.querySelectorAll('.progress-bar-wrap').forEach(el => el.classList.remove('visible'));
+            document.querySelectorAll('.progress-bar-fill').forEach(el => el.style.width = '0%');
+            if (progressInterval) clearInterval(progressInterval);
+        }
+
+        function updateProgress(audio, index) {
+            if (progressInterval) clearInterval(progressInterval);
+            progressInterval = setInterval(() => {
+                if (!audio.duration) return;
+                const pct = (audio.currentTime / audio.duration) * 100;
+                const fill = document.getElementById('fill-' + index);
+                if (fill) fill.style.width = pct + '%';
+            }, 500);
+        }
+
         function playAudio(track, element) {
-            const audio = audioPlayers[track];
+            const { audio, index } = audioPlayers[track];
 
-            for (const t in audioPlayers) {
-                if (t !== track) audioPlayers[t].pause();
+            if (currentTrack && currentTrack !== audio) {
+                currentTrack.pause();
+                clearAll();
             }
-
-            document.querySelectorAll('.play-icon').forEach(icon => {
-                icon.classList.remove('pause');
-            });
 
             if (audio.paused) {
                 audio.play();
-                element.querySelector('.play-icon').classList.add('pause');
+                element.classList.add('playing');
+                const progressWrap = document.getElementById('progress-' + index);
+                if (progressWrap) progressWrap.classList.add('visible');
+                updateProgress(audio, index);
+                currentTrack = audio;
+                currentElement = element;
             } else {
                 audio.pause();
-                element.querySelector('.play-icon').classList.remove('pause');
+                element.classList.remove('playing');
+                const progressWrap = document.getElementById('progress-' + index);
+                if (progressWrap) progressWrap.classList.remove('visible');
+                if (progressInterval) clearInterval(progressInterval);
+                currentTrack = null;
+                currentElement = null;
             }
 
             audio.onended = () => {
-                element.querySelector('.play-icon').classList.remove('pause');
+                clearAll();
+                currentTrack = null;
+                currentElement = null;
             };
         }
     </script>
