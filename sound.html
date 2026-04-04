@@ -80,39 +80,18 @@
       pointer-events: none;
     }
 
-    /* ── LABELS — plain, no effects ── */
-    .label {
+    /* ── MIXTAPES — top left ── */
+    #lbl-mixtapes {
       position: absolute;
+      top: 32px;
+      left: 32px;
       font-family: 'ES Allianz TRIAL', sans-serif;
-      color: var(--white);
+      font-size: 12px;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.5);
       opacity: 0;
       user-select: none;
-      transform: translate(-50%, -50%);
       white-space: nowrap;
-      letter-spacing: 0;
-    }
-
-    /* RELEASES */
-    #lbl-releases {
-      font-size: 15px;
-      display: block;
-      color: rgba(255,255,255,0.5);
-      cursor: pointer;
-      text-decoration: underline;
-      text-decoration-color: transparent;
-      text-underline-offset: 3px;
-      transition: color 0.2s ease, text-decoration-color 0.2s ease;
-    }
-
-    #lbl-releases:hover {
-      color: var(--white);
-      text-decoration-color: var(--white);
-    }
-
-    /* MIXTAPES */
-    #lbl-mixtapes {
-      font-size: 12px;
-      color: rgba(255,255,255,0.5);
       cursor: default;
       text-decoration: underline;
       text-decoration-color: transparent;
@@ -121,6 +100,64 @@
     }
 
     #lbl-mixtapes:hover {
+      color: var(--white);
+      text-decoration-color: var(--white);
+    }
+
+    /* ── RELEASES — centered, slightly above middle ── */
+    #releases-wrap {
+      position: absolute;
+      left: 50%;
+      top: 42%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #lbl-releases {
+      font-family: 'Baskerville', 'Baskerville Old Face', 'Libre Baskerville', Georgia, serif;
+      font-size: 15px;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.5);
+      user-select: none;
+      white-space: nowrap;
+      cursor: default;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+
+    #releases-wrap:hover #lbl-releases {
+      color: var(--white);
+      text-decoration-color: var(--white);
+    }
+
+    /* ── DROPDOWN LIST ── */
+    #releases-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .artist-item {
+      font-family: 'Baskerville', 'Baskerville Old Face', 'Libre Baskerville', Georgia, serif;
+      font-size: 12px;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.5);
+      white-space: nowrap;
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-underline-offset: 3px;
+      transition: color 0.15s ease, text-decoration-color 0.15s ease;
+    }
+
+    .artist-item:hover {
       color: var(--white);
       text-decoration-color: var(--white);
     }
@@ -134,17 +171,28 @@
 </div>
 
 <div id="scene">
-  <a href="releases.html" class="label" id="lbl-releases">RELEASES</a>
-  <div class="label" id="lbl-mixtapes">MIXTAPES</div>
+
+  <!-- MIXTAPES — top left -->
+  <div id="lbl-mixtapes">MIXTAPES</div>
+
+  <!-- RELEASES — centered with dropdown -->
+  <div id="releases-wrap">
+    <div id="lbl-releases">RELEASES</div>
+    <div id="releases-list">
+      <a class="artist-item" href="releases.html">Artist 1</a>
+      <span class="artist-item">Artist 2</span>
+    </div>
+  </div>
+
 </div>
 
 <script>
-  const glitchScreen = document.getElementById('glitch-screen');
-  const bg           = document.getElementById('glitch-bg');
-  const barsEl       = document.getElementById('glitch-bars');
-  const scene        = document.getElementById('scene');
-  const releases     = document.getElementById('lbl-releases');
-  const mixtapes     = document.getElementById('lbl-mixtapes');
+  const glitchScreen  = document.getElementById('glitch-screen');
+  const bg            = document.getElementById('glitch-bg');
+  const barsEl        = document.getElementById('glitch-bars');
+  const scene         = document.getElementById('scene');
+  const releasesWrap  = document.getElementById('releases-wrap');
+  const mixtapes      = document.getElementById('lbl-mixtapes');
 
   const rand  = (a, b) => Math.random() * (b - a) + a;
   const randI = (a, b) => Math.floor(rand(a, b));
@@ -168,52 +216,28 @@
     }
   }
 
-  function placeLabels() {
-    // Force them into opposite quadrants so they're well separated
-    const quadrants = [
-      { xMin: 10, xMax: 42, yMin: 10, yMax: 45 },
-      { xMin: 55, xMax: 88, yMin: 52, yMax: 88 },
-    ];
-    // randomly swap quadrants
-    if (Math.random() > 0.5) quadrants.reverse();
-
-    const pick = (q) => ({
-      x: rand(q.xMin, q.xMax),
-      y: rand(q.yMin, q.yMax)
-    });
-
-    const p1 = pick(quadrants[0]);
-    const p2 = pick(quadrants[1]);
-
-    releases.style.left = p1.x + '%';
-    releases.style.top  = p1.y + '%';
-    mixtapes.style.left = p2.x + '%';
-    mixtapes.style.top  = p2.y + '%';
-  }
-
   async function runGlitch() {
-    // phase 1: rapid flashes — reduced to 7 iterations
+    // phase 1: rapid flashes
     for (let i = 0; i < 7; i++) {
       await flashBg(i % 2 === 0 ? '#fff' : '#000', randI(30, 100));
       spawnBars(randI(2, 6));
       await wait(randI(15, 50));
     }
 
-    // phase 2: short chaos burst — reduced to 8 iterations
+    // phase 2: chaos burst
     for (let i = 0; i < 8; i++) {
       bg.style.background = Math.random() > 0.5 ? '#fff' : '#000';
       spawnBars(randI(3, 8));
       await wait(randI(20, 60));
     }
 
-    // phase 3: one last snap to black
+    // phase 3: snap to black
     bg.style.background = '#fff';
     await wait(50);
     bg.style.background = '#000';
     await wait(80);
 
-    placeLabels();
-
+    // reveal
     glitchScreen.style.transition = 'opacity 0.3s ease';
     scene.style.transition        = 'opacity 0.3s ease';
     scene.style.pointerEvents     = 'auto';
@@ -222,8 +246,8 @@
 
     await wait(250);
 
-    releases.style.transition = 'opacity 0.25s ease';
-    releases.style.opacity    = '1';
+    releasesWrap.style.transition = 'opacity 0.25s ease';
+    releasesWrap.style.opacity    = '1';
 
     await wait(180);
 
