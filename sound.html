@@ -92,11 +92,10 @@
       opacity: 0;
       user-select: none;
       white-space: nowrap;
-      cursor: default;
-      text-decoration: underline;
-      text-decoration-color: transparent;
+      cursor: pointer;
+      text-decoration: none;
       text-underline-offset: 3px;
-      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+      transition: color 0.2s ease;
     }
 
     #lbl-mixtapes:hover {
@@ -164,14 +163,14 @@
 <div id="scene">
 
   <!-- MIXTAPES — top left -->
-  <div id="lbl-mixtapes">MIXTAPES</div>
+  <a href="mixtapes.html" id="lbl-mixtapes">MIXTAPES</a>
 
   <!-- RELEASES — centered with dropdown -->
   <div id="releases-wrap">
     <div id="lbl-releases">Releases</div>
     <div id="releases-list">
-      <a class="artist-item" href="releases.html">int291</a>
-      <span class="artist-item">int292</span>
+      <a class="artist-item" href="releases.html">Artist 1</a>
+      <span class="artist-item">Artist 2</span>
     </div>
   </div>
 
