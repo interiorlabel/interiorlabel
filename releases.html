@@ -1,313 +1,268 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Protocol - Works</title>
-    <link rel="icon" type="image/jpeg" href="favicon.jpg">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SOUND</title>
+  <style>
+    @font-face {
+      font-family: 'ES Allianz TRIAL';
+      src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #000000;
-            font-family: Baskerville, "Times New Roman", serif;
-            color: #7a7a7a;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards;
-        }
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--black);
+      font-family: 'ES Allianz TRIAL', sans-serif;
+    }
 
-        a {
-            color: #7a7a7a;
-            text-decoration: none;
-        }
+    .back-arrow {
+      position: fixed;
+      top: 30px;
+      left: 20px;
+      font-size: 22px;
+      color: grey;
+      cursor: pointer;
+      text-decoration: none;
+      z-index: 100;
+    }
+    .back-arrow:hover {
+      color: #ffffff;
+    }
+    #glitch-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--black);
+      z-index: 100;
+    }
 
-        a:hover { color: #e0e0e0; }
+    #glitch-screen::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255,255,255,0.03) 2px,
+        rgba(255,255,255,0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 2;
+    }
 
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            padding: 28px 28px;
-        }
+    #glitch-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--black);
+    }
 
-        .back-arrow {
-            font-size: 18px;
-            color: #6a6a6a;
-        }
+    #glitch-bars {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 3;
+    }
 
-        .bandcamp-link {
-            font-size: 12px;
-            color: #6a6a6a;
-            border-bottom: 1px solid #3a3a3a;
-            font-family: "EK Grotesk", sans-serif;
-            text-transform: uppercase;
-        }
+    .bar {
+      position: absolute;
+      left: 0; right: 0;
+      background: var(--white);
+    }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 480px;
-            padding: 100px 32px 60px;
-        }
+    /* ── MAIN CONTENT ── */
+    #scene {
+      position: fixed;
+      inset: 0;
+      background: var(--black);
+      opacity: 0;
+      pointer-events: none;
+    }
 
-        .release-label {
-            font-size: 10px;
-            color: #555;
-            margin-bottom: 6px;
-        }
+    /* ── MIXTAPES — top left ── */
+    #lbl-mixtapes {
+      position: absolute;
+      top: 32px;
+      right: 32px;
+      font-family: 'ES Allianz TRIAL', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.5);
+      opacity: 0;
+      user-select: none;
+      white-space: nowrap;
+      cursor: pointer;
+      text-decoration: none;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease;
+    }
 
-        .release-title {
-            font-size: 20px;
-            color: #a0a0a0;
-            margin-bottom: 52px;
-        }
+    #lbl-mixtapes:hover {
+      color: var(--white);
+      text-decoration-color: var(--white);
+    }
 
-        .track-list {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            margin-bottom: 52px;
-        }
+    /* ── RELEASES — centered, slightly above middle ── */
+    #releases-wrap {
+      position: absolute;
+      left: 50%;
+      top: 42%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        /* === RELEASED TRACK (01) === */
-        .track-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 0;
-            border-top: 1px solid #1a1a1a;
-            cursor: pointer;
-            color: #8a8a8a;
-            transition: color 0.2s;
-        }
+    #lbl-releases {
+      font-family: 'Baskerville', 'Baskerville Old Face', 'Libre Baskerville', Georgia, serif;
+      font-size: 20px;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.5);
+      user-select: none;
+      white-space: nowrap;
+      cursor: default;
+    }
 
-        .track-item:last-child {
-            border-bottom: 1px solid #1a1a1a;
-        }
+    /* ── DROPDOWN LIST ── */
+    #releases-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+    }
 
-        .track-item:hover {
-            color: #ffffff;
-        }
+    .artist-item {
+      font-family: 'Baskerville', 'Baskerville Old Face', 'Libre Baskerville', Georgia, serif;
+      font-size: 15px;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.5);
+      white-space: nowrap;
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-underline-offset: 3px;
+      transition: color 0.15s ease, text-decoration-color 0.15s ease;
+    }
 
-        /* === UNRELEASED TRACKS (02–04) === */
-        .track-item.unreleased {
-            cursor: default;
-            color: #3a3a3a;
-        }
-
-        .track-item.unreleased:hover {
-            color: #3a3a3a;
-        }
-
-        .track-item.unreleased .track-number {
-            color: #2e2e2e;
-        }
-
-        /* === SHARED TRACK STYLES === */
-        .track-left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .track-number {
-            font-size: 11px;
-            color: #555;
-        }
-
-        .track-name {
-            font-size: 14px;
-        }
-
-        /* Play/pause icon */
-        .play-icon-wrap {
-            position: relative;
-            width: 10px;
-            height: 12px;
-            flex-shrink: 0;
-        }
-
-        .play-icon {
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 6px 0 6px 10px;
-            border-color: transparent transparent transparent #8a8a8a;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: opacity 0.2s;
-        }
-
-        .pause-wrap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: flex;
-            gap: 3px;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .pause-bar {
-            width: 3px;
-            height: 12px;
-            background: #8a8a8a;
-        }
-
-        /* Playing state */
-        .track-item.playing .play-icon { opacity: 0; }
-        .track-item.playing .pause-wrap { opacity: 1; }
-
-        /* Progress bar */
-        .progress-bar-wrap {
-            width: 100%;
-            height: 1px;
-            background: #1a1a1a;
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.3s ease;
-        }
-
-        .progress-bar-wrap.visible {
-            max-height: 1px;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: #9a9a9a;
-            transition: width 0.4s linear;
-        }
-
-        .description {
-            font-size: 15px;
-            color: #666;
-            line-height: 1.8;
-        }
-
-    </style>
+    .artist-item:hover {
+      color: var(--white);
+      text-decoration-color: var(--white);
+    }
+  </style>
 </head>
 <body>
 
-<nav class="nav">
-    <a href="index.html" class="back-arrow">←</a>
-    <a href="https://interiorr.bandcamp.com/" class="bandcamp-link" target="_blank">Bandcamp</a>
-</nav>
+<a href="index.html" class="back-arrow">&#8592;</a>
 
-<div class="container">
+<div id="glitch-screen">
+  <div id="glitch-bg"></div>
+  <div id="glitch-bars"></div>
+</div>
 
-    <div class="release-label">Protocol</div>
-    <div class="release-title">Channel Zero</div>
+<div id="scene">
 
-    <div class="track-list">
+  <!-- MIXTAPES — top left -->
+  <a href="mixtapes.html" id="lbl-mixtapes">MIXTAPES</a>
 
-        <!-- Track 01 — released, playable -->
-        <div class="track-item" onclick="playAudio('lost-signal-noise.mp3', this)" data-index="0">
-            <div class="track-left">
-                <span class="track-number">01</span>
-                <span class="track-name">Lost Signal (Noise)</span>
-            </div>
-            <div class="play-icon-wrap">
-                <div class="play-icon"></div>
-                <div class="pause-wrap">
-                    <div class="pause-bar"></div>
-                    <div class="pause-bar"></div>
-                </div>
-            </div>
-        </div>
-        <div class="progress-bar-wrap" id="progress-0"><div class="progress-bar-fill" id="fill-0"></div></div>
-
-        <!-- Tracks 02–04 — unreleased, not interactive -->
-        <div class="track-item unreleased">
-            <div class="track-left">
-                <span class="track-number">02</span>
-                <span class="track-name">Blind Belief</span>
-            </div>
-        </div>
-
-        <div class="track-item unreleased">
-            <div class="track-left">
-                <span class="track-number">03</span>
-                <span class="track-name">Electromagnetic Shadow</span>
-            </div>
-        </div>
-
-        <div class="track-item unreleased">
-            <div class="track-left">
-                <span class="track-number">04</span>
-                <span class="track-name">Black Snow Cult</span>
-            </div>
-        </div>
-
+  <!-- RELEASES — centered with dropdown -->
+  <div id="releases-wrap">
+    <div id="lbl-releases">Releases</div>
+    <div id="releases-list">
+      <a class="artist-item" href="releases.html">int291</a>
+      <span class="artist-item">int292</span>
     </div>
-
-    <div class="description">
-        Live hardware recordings · London · 2026<br>
-        Mastered by Manmade Mastering, Berlin<br>
-        Limited to 150 copies on vinyl
-    </div>
+  </div>
 
 </div>
 
 <script>
-const audio = new Audio();
-let playing = false;
-let progressInterval;
+  const glitchScreen  = document.getElementById('glitch-screen');
+  const bg            = document.getElementById('glitch-bg');
+  const barsEl        = document.getElementById('glitch-bars');
+  const scene         = document.getElementById('scene');
+  const releasesWrap  = document.getElementById('releases-wrap');
+  const mixtapes      = document.getElementById('lbl-mixtapes');
 
-function playAudio(track, element) {
-    if (!playing) {
-        audio.src = track;
-        audio.currentTime = 0;
-        audio.play();
+  const rand  = (a, b) => Math.random() * (b - a) + a;
+  const randI = (a, b) => Math.floor(rand(a, b));
+  const wait  = ms => new Promise(r => setTimeout(r, ms));
 
-        element.classList.add('playing');
-        document.getElementById('progress-0').classList.add('visible');
+  function flashBg(color, duration) {
+    bg.style.background = color;
+    return wait(duration).then(() => { bg.style.background = '#000'; });
+  }
 
-        progressInterval = setInterval(() => {
-            if (!audio.duration) return;
-            const pct = (audio.currentTime / audio.duration) * 100;
-            document.getElementById('fill-0').style.width = pct + '%';
-        }, 400);
+  function spawnBars(count) {
+    barsEl.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      const h = rand(2, 35);
+      const t = rand(0, 100 - h);
+      bar.style.cssText = `top:${t}%;height:${h}%;opacity:${rand(0.4,1)};`;
+      barsEl.appendChild(bar);
+      setTimeout(() => bar.remove(), rand(30, 120));
+    }
+  }
 
-        playing = true;
-
-    } else {
-        audio.pause();
-        element.classList.remove('playing');
-        document.getElementById('progress-0').classList.remove('visible');
-        clearInterval(progressInterval);
-        playing = false;
+  async function runGlitch() {
+    // phase 1: rapid flashes
+    for (let i = 0; i < 7; i++) {
+      await flashBg(i % 2 === 0 ? '#fff' : '#000', randI(30, 100));
+      spawnBars(randI(2, 6));
+      await wait(randI(15, 50));
     }
 
-    audio.onended = () => {
-        element.classList.remove('playing');
-        document.getElementById('progress-0').classList.remove('visible');
-        document.getElementById('fill-0').style.width = '0%';
-        clearInterval(progressInterval);
-        playing = false;
-    };
-}
-</script>
+    // phase 2: chaos burst
+    for (let i = 0; i < 8; i++) {
+      bg.style.background = Math.random() > 0.5 ? '#fff' : '#000';
+      spawnBars(randI(3, 8));
+      await wait(randI(20, 60));
+    }
 
+    // phase 3: snap to black
+    bg.style.background = '#fff';
+    await wait(50);
+    bg.style.background = '#000';
+    await wait(80);
+
+    // reveal
+    glitchScreen.style.transition = 'opacity 0.3s ease';
+    scene.style.transition        = 'opacity 0.3s ease';
+    scene.style.pointerEvents     = 'auto';
+    glitchScreen.style.opacity    = '0';
+    scene.style.opacity           = '1';
+
+    await wait(250);
+
+    releasesWrap.style.transition = 'opacity 0.25s ease';
+    releasesWrap.style.opacity    = '1';
+
+    await wait(180);
+
+    mixtapes.style.transition = 'opacity 0.25s ease';
+    mixtapes.style.opacity    = '1';
+
+    await wait(300);
+    glitchScreen.remove();
+  }
+
+  runGlitch();
+</script>
 </body>
 </html>
