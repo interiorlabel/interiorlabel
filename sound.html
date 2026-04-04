@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +37,6 @@
       z-index: 100;
     }
 
-    /* scanlines */
     #glitch-screen::before {
       content: '';
       position: absolute;
@@ -58,7 +56,6 @@
       position: absolute;
       inset: 0;
       background: var(--black);
-      transition: background 0s;
     }
 
     #glitch-bars {
@@ -72,7 +69,6 @@
       position: absolute;
       left: 0; right: 0;
       background: var(--white);
-      opacity: 0;
     }
 
     /* ── MAIN CONTENT ── */
@@ -84,18 +80,7 @@
       pointer-events: none;
     }
 
-    /* noise texture overlay */
-    #scene::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
-      pointer-events: none;
-      opacity: 0.4;
-      mix-blend-mode: screen;
-    }
-
-    /* ── SHARED LABEL BASE ── */
+    /* ── LABELS — plain, no effects ── */
     .label {
       position: absolute;
       font-family: 'ES Allianz TRIAL', sans-serif;
@@ -104,74 +89,22 @@
       user-select: none;
       transform: translate(-50%, -50%);
       white-space: nowrap;
-      animation: word-flicker 6s infinite;
+      letter-spacing: 0;
     }
 
-    .label::before,
-    .label::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      opacity: 0;
-    }
-    .label::before {
-      color: #ff0000;
-      clip-path: inset(10% 0 60% 0);
-      animation: glitch-r 4s infinite;
-    }
-    .label::after {
-      color: #00ffff;
-      clip-path: inset(60% 0 10% 0);
-      animation: glitch-c 4s infinite 0.5s;
-    }
-
-    /* ── RELEASES — big & clickable ── */
+    /* RELEASES */
     #lbl-releases {
-      font-size: clamp(72px, 11vw, 175px);
-      letter-spacing: 0.06em;
-      cursor: pointer;
+      font-size: clamp(32px, 5vw, 80px);
       text-decoration: none;
       display: block;
       color: var(--white);
+      cursor: pointer;
     }
 
-    #lbl-releases:hover {
-      animation: word-flicker 6s infinite, hover-jitter 0.1s infinite;
-    }
-
-    /* ── MIXTAPES — smaller, secondary ── */
+    /* MIXTAPES */
     #lbl-mixtapes {
-      font-size: clamp(28px, 4vw, 64px);
-      letter-spacing: 0.2em;
-      color: rgba(255,255,255,0.5);
-    }
-
-    #lbl-mixtapes::before { color: rgba(255,0,0,0.5); }
-    #lbl-mixtapes::after  { color: rgba(0,255,255,0.5); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes word-flicker {
-      0%,94%,96%,100% { opacity: 1; }
-      95% { opacity: 0.4; }
-    }
-    @keyframes glitch-r {
-      0%,90%,100% { opacity:0; transform: translate(0); }
-      91% { opacity:0.7; transform: translate(-4px, 2px); }
-      93% { opacity:0.5; transform: translate(4px, -2px); }
-      95% { opacity:0; }
-    }
-    @keyframes glitch-c {
-      0%,85%,100% { opacity:0; transform: translate(0); }
-      86% { opacity:0.7; transform: translate(4px, -2px); }
-      88% { opacity:0.5; transform: translate(-4px, 2px); }
-      90% { opacity:0; }
-    }
-    @keyframes hover-jitter {
-      0%   { transform: translate(-50%,-50%) skewX(0deg); }
-      33%  { transform: translate(calc(-50% + 3px),-50%) skewX(-2deg); }
-      66%  { transform: translate(calc(-50% - 3px),-50%) skewX(2deg); }
-      100% { transform: translate(-50%,-50%) skewX(0deg); }
+      font-size: clamp(32px, 5vw, 80px);
+      color: var(--white);
     }
   </style>
 </head>
@@ -183,9 +116,8 @@
 </div>
 
 <div id="scene">
-  <!-- Clicking RELEASES navigates to releases.html -->
-  <a href="releases.html" class="label" id="lbl-releases" data-text="RELEASES">RELEASES</a>
-  <div class="label" id="lbl-mixtapes" data-text="MIXTAPES">MIXTAPES</div>
+  <a href="releases.html" class="label" id="lbl-releases">RELEASES</a>
+  <div class="label" id="lbl-mixtapes">MIXTAPES</div>
 </div>
 
 <script>
@@ -210,27 +142,30 @@
     for (let i = 0; i < count; i++) {
       const bar = document.createElement('div');
       bar.className = 'bar';
-      const h = rand(2, 40);
+      const h = rand(2, 35);
       const t = rand(0, 100 - h);
-      bar.style.cssText = `top:${t}%;height:${h}%;opacity:${rand(0.3,1)};`;
+      bar.style.cssText = `top:${t}%;height:${h}%;opacity:${rand(0.4,1)};`;
       barsEl.appendChild(bar);
-      setTimeout(() => bar.remove(), rand(40, 180));
+      setTimeout(() => bar.remove(), rand(30, 120));
     }
   }
 
-  function randomPos(padX = 18, padY = 18) {
-    return {
-      x: rand(padX, 100 - padX),
-      y: rand(padY, 100 - padY)
-    };
-  }
-
   function placeLabels() {
-    let p1, p2;
-    do {
-      p1 = randomPos(22, 20);
-      p2 = randomPos(20, 20);
-    } while (Math.abs(p1.x - p2.x) < 30 && Math.abs(p1.y - p2.y) < 24);
+    // Force them into opposite quadrants so they're well separated
+    const quadrants = [
+      { xMin: 10, xMax: 42, yMin: 10, yMax: 45 },
+      { xMin: 55, xMax: 88, yMin: 52, yMax: 88 },
+    ];
+    // randomly swap quadrants
+    if (Math.random() > 0.5) quadrants.reverse();
+
+    const pick = (q) => ({
+      x: rand(q.xMin, q.xMax),
+      y: rand(q.yMin, q.yMax)
+    });
+
+    const p1 = pick(quadrants[0]);
+    const p2 = pick(quadrants[1]);
 
     releases.style.left = p1.x + '%';
     releases.style.top  = p1.y + '%';
@@ -239,54 +174,45 @@
   }
 
   async function runGlitch() {
-    // phase 1: rapid flashes
-    for (let i = 0; i < 14; i++) {
-      await flashBg(i % 2 === 0 ? '#fff' : '#000', randI(40, 160));
-      spawnBars(randI(2, 8));
-      await wait(randI(20, 80));
+    // phase 1: rapid flashes — reduced to 7 iterations
+    for (let i = 0; i < 7; i++) {
+      await flashBg(i % 2 === 0 ? '#fff' : '#000', randI(30, 100));
+      spawnBars(randI(2, 6));
+      await wait(randI(15, 50));
     }
 
-    // phase 2: chaos burst
-    for (let i = 0; i < 18; i++) {
+    // phase 2: short chaos burst — reduced to 8 iterations
+    for (let i = 0; i < 8; i++) {
       bg.style.background = Math.random() > 0.5 ? '#fff' : '#000';
-      spawnBars(randI(4, 12));
-      await wait(randI(30, 100));
+      spawnBars(randI(3, 8));
+      await wait(randI(20, 60));
     }
 
-    // phase 3: final flickers
-    await flashBg('#fff', 80);
-    await wait(60);
-    await flashBg('#fff', 40);
+    // phase 3: one last snap to black
+    bg.style.background = '#fff';
+    await wait(50);
+    bg.style.background = '#000';
     await wait(80);
-    await flashBg('#000', 60);
-    await wait(100);
 
     placeLabels();
 
-    glitchScreen.style.transition = 'opacity 0.4s ease';
-    scene.style.transition        = 'opacity 0.4s ease';
+    glitchScreen.style.transition = 'opacity 0.3s ease';
+    scene.style.transition        = 'opacity 0.3s ease';
     scene.style.pointerEvents     = 'auto';
     glitchScreen.style.opacity    = '0';
     scene.style.opacity           = '1';
 
-    await wait(300);
+    await wait(250);
 
-    // RELEASES pops in first — it's the main act
-    releases.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    releases.style.transform  = 'translate(-50%,-50%) scale(1.06)';
+    releases.style.transition = 'opacity 0.25s ease';
     releases.style.opacity    = '1';
-    await wait(220);
-    releases.style.transform  = 'translate(-50%,-50%) scale(1)';
 
-    // MIXTAPES follows, dimmer
-    await wait(220);
-    mixtapes.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-    mixtapes.style.transform  = 'translate(-50%,-50%) scale(1.06)';
-    mixtapes.style.opacity    = '0.5';
-    await wait(200);
-    mixtapes.style.transform  = 'translate(-50%,-50%) scale(1)';
+    await wait(180);
 
-    await wait(400);
+    mixtapes.style.transition = 'opacity 0.25s ease';
+    mixtapes.style.opacity    = '1';
+
+    await wait(300);
     glitchScreen.remove();
   }
 
