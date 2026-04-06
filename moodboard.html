@@ -1,1 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moodboard</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap');
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    #image-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #moodboard-img {
+      width: 420px;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      filter: grayscale(10%);
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    #moodboard-img.visible {
+      opacity: 1;
+    }
+
+    #label {
+      margin-top: 28px;
+      font-family: 'IM Fell English', serif;
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      color: #555;
+      text-transform: uppercase;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+
+    body:hover #label {
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="image-wrapper">
+    <img id="moodboard-img" src="" alt="moodboard" />
+  </div>
+  <div id="label">click</div>
+
+  <script>
+    const images = [
+      "moodboard/AlfredStieglitz.png",
+      "moodboard/Actionism.jpg",
+      "moodboard/AlexeyYurenev.jpg",
+      "moodboard/BillBrandt.webp",
+      "moodboard/Coum.jpg",
+      "moodboard/Deleuze.png",
+      "moodboard/ElianeRadigue.jpg",
+      "moodboard/FrancisBacon.png",
+      "moodboard/Gallery291.png",
+      "moodboard/GeorgTrakl.png",
+      "moodboard/HeddaSterne,.webp",
+      "moodboard/IannisXenakis.jpg",
+      "moodboard/LinaBoBardiDrawings.jpg",
+      "moodboard/MadameSata.jpg",
+      "moodboard/MayaDeren.jpg",
+      "moodboard/Messiaen.jpg",
+      "moodboard/Mika Vainio.jpg",
+      "moodboard/MohammedSalemy.jpg",
+      "moodboard/Morton.jpg",
+      "moodboard/Numogram.png",
+      "moodboard/Pasolini.jpg",
+      "moodboard/PeterBrotzmann.jpg",
+      "moodboard/PierreSchaeffer.jpg",
+      "moodboard/Sadieplant.png",
+      "moodboard/SilenceJohnCage.png",
+      "moodboard/Tiqqun.png"
+    ];
+
+    const img = document.getElementById('moodboard-img');
+    let currentIndex = 0;
+    let remaining = [];
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function refillPool() {
+      // all images except the first (AlfredStieglitz)
+      remaining = shuffle(images.slice(1));
+    }
+
+    function nextImage() {
+      if (currentIndex === 0) {
+        // first click — go to random from pool
+        if (remaining.length === 0) refillPool();
+        const next = remaining.pop();
+        switchTo(next);
+        currentIndex = 1;
+      } else {
+        if (remaining.length === 0) refillPool();
+        const next = remaining.pop();
+        switchTo(next);
+      }
+    }
+
+    function switchTo(src) {
+      img.classList.remove('visible');
+      setTimeout(() => {
+        img.src = src;
+        img.onload = () => img.classList.add('visible');
+        img.onerror = () => {
+          img.classList.add('visible'); // show broken gracefully
+        };
+      }, 300);
+    }
+
+    // Load first image immediately
+    img.src = images[0];
+    img.onload = () => img.classList.add('visible');
+
+    document.body.addEventListener('click', nextImage);
+  </script>
+</body>
+</html>
