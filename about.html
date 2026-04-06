@@ -34,6 +34,7 @@
             opacity: 0;
             animation: fadeIn 0.6s ease-in forwards;
         }
+
         .back-arrow {
             position: fixed;
             top: 30px;
@@ -44,14 +45,17 @@
             text-decoration: none;
             z-index: 100;
         }
+
         .back-arrow:hover {
             color: #ffffff;
         }
+
         .text-container {
             text-align: justify;
             max-width: 600px;
             padding: 0 20px;
         }
+
         p {
             margin: 0;
             font-size: 15px;
@@ -60,18 +64,22 @@
             font-weight: 300;
             font-family: Baskerville, "Times New Roman", serif;
         }
+
         .first-paragraph {
             margin-bottom: 10px;
         }
+
         .second-paragraph {
             margin-bottom: 10px;
         }
+
         .social-links {
             display: flex;
             gap: 40px;
-            margin-top: 80px;
+            margin-top: 40px; /* FIXED spacing */
             justify-content: flex-start;
         }
+
         .social-link {
             color: grey;
             font-size: 11px;
@@ -80,9 +88,11 @@
             font-family: 'ES Allianz TRIAL';
             text-transform: uppercase;
         }
+
         .social-link:hover {
             color: #ffffff;
         }
+
         .collection-link {
             display: block;
             margin-top: 40px;
@@ -94,9 +104,11 @@
             font-style: italic;
             transition: color 0.2s ease;
         }
+
         .collection-link:hover {
             color: #ffffff;
         }
+
         #content-frame {
             position: fixed;
             top: 0;
@@ -114,23 +126,32 @@
                 font-size: 15px;
                 line-height: 1.55;
             }
+
             .social-links {
                 flex-direction: column;  
                 gap: 15px;
-                margin-top: 50px;
+                margin-top: 40px; /* keep consistent on mobile */
                 align-items: flex-start;
             }
+
             .social-link {
                 font-size: 11px;
             }
         }
     </style>
 </head>
+
 <body>
     <a href="index.html" class="back-arrow">←</a>
+
     <div class="text-container">
-        <p class="clickable-text first-paragraph" id="protocol-sentence">Record label focused on foward-thinking electronic music</p>
-        <p class="second-paragraph">Founded in 2025 by Protocol</p>
+        <p class="clickable-text first-paragraph" id="protocol-sentence">
+            Record label focused on foward-thinking electronic music
+        </p>
+
+        <p class="second-paragraph">
+            Founded in 2025 by Protocol
+        </p>
         
         <a href="moodboard.html" class="collection-link">collection</a>
 
@@ -140,6 +161,7 @@
             <a href="https://www.instagram.com/protocol.intr" class="social-link" target="_blank">instagram</a>
         </div>
     </div>
+
     <iframe id="content-frame" src=""></iframe>
 </body>
 </html>
