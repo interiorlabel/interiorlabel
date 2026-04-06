@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moodboard</title>
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap');
 
@@ -25,20 +26,40 @@
       cursor: pointer;
     }
 
+    /* BACK ARROW */
+    .back-arrow {
+      position: fixed;
+      top: 30px;
+      left: 20px;
+      font-size: 22px;
+      color: grey;
+      cursor: pointer;
+      text-decoration: none;
+      z-index: 100;
+    }
+
+    .back-arrow:hover {
+      color: #ffffff;
+    }
+
     #image-wrapper {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
+      max-width: 90vw;
+      max-height: 80vh;
     }
 
+    /* ORIGINAL IMAGE SIZE (no forced square) */
     #moodboard-img {
-      width: 420px;
-      height: 420px;
-      object-fit: cover;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
       display: block;
       opacity: 0;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.25s ease; /* faster fade */
       filter: grayscale(10%);
       user-select: none;
       -webkit-user-drag: none;
@@ -64,11 +85,16 @@
     }
   </style>
 </head>
+
 <body>
+
+  <!-- BACK BUTTON -->
+  <a href="index.html" class="back-arrow">←</a>
 
   <div id="image-wrapper">
     <img id="moodboard-img" src="" alt="moodboard" />
   </div>
+
   <div id="label">click</div>
 
   <script>
@@ -115,13 +141,11 @@
     }
 
     function refillPool() {
-      // all images except the first (AlfredStieglitz)
       remaining = shuffle(images.slice(1));
     }
 
     function nextImage() {
       if (currentIndex === 0) {
-        // first click — go to random from pool
         if (remaining.length === 0) refillPool();
         const next = remaining.pop();
         switchTo(next);
@@ -135,20 +159,20 @@
 
     function switchTo(src) {
       img.classList.remove('visible');
+
       setTimeout(() => {
         img.src = src;
         img.onload = () => img.classList.add('visible');
-        img.onerror = () => {
-          img.classList.add('visible'); // show broken gracefully
-        };
-      }, 300);
+        img.onerror = () => img.classList.add('visible');
+      }, 120); // faster switch
     }
 
-    // Load first image immediately
+    // initial image
     img.src = images[0];
     img.onload = () => img.classList.add('visible');
 
     document.body.addEventListener('click', nextImage);
   </script>
+
 </body>
 </html>
