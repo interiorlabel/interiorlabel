@@ -6,8 +6,8 @@
   <title>SOUND</title>
   <style>
     @font-face {
-      font-family: 'ES Allianz TRIAL';
-      src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
+      font-family: 'DGMSaffron-Mono-Regular';
+      src: url('FONTS/DGMSaffron-Mono-Regular.otf') format('opentype');
       font-weight: normal;
       font-style: normal;
       font-display: swap;
@@ -26,7 +26,7 @@
       width: 100%; height: 100%;
       overflow: hidden;
       background: var(--black);
-      font-family: 'ES Allianz TRIAL', sans-serif;
+      font-family: 'DGMSaffron-Mono-Regular', sans-serif;
     }
 
     .back-arrow {
@@ -92,12 +92,12 @@
       pointer-events: none;
     }
 
-    /* ── MIXTAPES — top left ── */
+    /* ── MIXTAPES ── */
     #lbl-mixtapes {
       position: fixed;
       top: 28px;
       right: 28px;
-      font-family: 'ES Allianz TRIAL', sans-serif;
+      font-family: 'DGMSaffron-Mono-Regular', sans-serif;
       font-size: 12px;
       letter-spacing: 0;
       color: rgba(255,255,255,0.5);
@@ -108,7 +108,7 @@
       text-decoration: none;
       text-underline-offset: 3px;
       transition: color 0.2s ease;
-      border-bottom: 1px solid #3a3a3a
+      border-bottom: 1px solid #3a3a3a;
     }
 
     #lbl-mixtapes:hover {
@@ -116,7 +116,7 @@
       text-decoration-color: var(--white);
     }
 
-    /* ── RELEASES — centered, slightly above middle ── */
+    /* ── RELEASES ── */
     #releases-wrap {
       position: absolute;
       left: 50%;
@@ -129,7 +129,7 @@
     }
 
     #lbl-releases {
-      font-family: 'Baskerville', 'Baskerville Old Face', 'Libre Baskerville', Georgia, serif;
+      font-family: 'DGMSaffron-Mono-Regular', sans-serif;
       font-size: 20px;
       letter-spacing: 0;
       color: rgba(255,255,255,0.5);
@@ -148,7 +148,7 @@
     }
 
     .artist-item {
-      font-family: 'Baskerville', 'Baskerville Old Face', 'Libre Baskerville', Georgia, serif;
+      font-family: 'DGMSaffron-Mono-Regular', sans-serif;
       font-size: 15px;
       letter-spacing: 0;
       color: rgba(255,255,255,0.5);
@@ -177,7 +177,7 @@
 
 <div id="scene">
 
-  <!-- MIXTAPES — top left -->
+  <!-- MIXTAPES — top right -->
   <a href="mixtapes.html" id="lbl-mixtapes">MIXTAPES</a>
 
   <!-- RELEASES — centered with dropdown -->
@@ -222,27 +222,23 @@
   }
 
   async function runGlitch() {
-    // phase 1: rapid flashes
     for (let i = 0; i < 7; i++) {
       await flashBg(i % 2 === 0 ? '#fff' : '#000', randI(30, 100));
       spawnBars(randI(2, 6));
       await wait(randI(15, 50));
     }
 
-    // phase 2: chaos burst
     for (let i = 0; i < 8; i++) {
       bg.style.background = Math.random() > 0.5 ? '#fff' : '#000';
       spawnBars(randI(3, 8));
       await wait(randI(20, 60));
     }
 
-    // phase 3: snap to black
     bg.style.background = '#fff';
     await wait(50);
     bg.style.background = '#000';
     await wait(80);
 
-    // reveal
     glitchScreen.style.transition = 'opacity 0.3s ease';
     scene.style.transition        = 'opacity 0.3s ease';
     scene.style.pointerEvents     = 'auto';
