@@ -7,115 +7,180 @@
     <link rel="icon" type="image/jpeg" href="favicon.jpg">
     <style>
     @font-face {
-        font-family: 'ES Allianz TRIAL';
-        src: url('ESAllianzTRIAL-Regular.ttf') format('truetype');
+        font-family: 'DGMSaffron-Mono-Regular';
+        src: url('FONTS/DGMSaffron-Mono-Regular.otf') format('opentype');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
     }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     body {
-        margin: 0;
-        padding: 0;
-        background-color: black;
-        font-family: 'ES Allianz TRIAL';
-        color: #b9b9b9;
+        background: #000;
+        color: #6a6a6a;
+        font-family: 'DGMSaffron-Mono-Regular', 'Courier New', monospace;
         min-height: 100vh;
-        overflow-x: hidden;
-        transition: background-color 0.5s ease;
-    }
-    /* When body has the hover class, go white */
-    body.logo-hovered {
-        background-color: white;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    .top-left-menu {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 18px;
-        z-index: 10;
+        padding: 60px 60px 80px;
         opacity: 0;
-        animation: fadeIn 0.8s ease-in 0.8s forwards;
-        text-align: center;
-        width: 100%;
-    }
-    .logo-img {
-        height: 100px;
-        user-select: none;
-        cursor: pointer;
-        transition: filter 0.5s ease;
-    }
-    /* Invert just the logo on hover */
-    body.logo-hovered .logo-img {
-        filter: invert(1);
-    }
-    .menu-links-row {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 20px;
+        animation: fadeIn 0.8s ease-in forwards;
         font-size: 16px;
-        transition: opacity 0.4s ease;
+        line-height: 1.2;
     }
-    /* Hide links on hover */
-    body.logo-hovered .menu-links-row {
-        opacity: 0;
-        pointer-events: none;
+    .header {
+        margin-bottom: 24px;
     }
-    .menu-link {
-        cursor: pointer;
+    .brand {
+        font-size: 20px;
+        letter-spacing: 0.08em;
+        color: #b9b9b9;
+    }
+    .brand a {
+        color: inherit;
         text-decoration: none;
-        color: #b9b9b9;
-        font-size: 16px;
-        margin: 0;
-        position: relative;
     }
-    .menu-link::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background-color: #b9b9b9;
-        transition: width 0.3s ease;
+    .about {
+        font-size: 13px;
+        color: #7a7a7a;
+        line-height: 1.7;
+        max-width: 56ch;
+        margin-bottom: 32px;
     }
-    .menu-link:hover::after {
-        width: 100%;
+    .about p { margin: 0; }
+
+    .socials {
+        display: flex;
+        gap: 28px;
+        margin-top: 40px;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
     }
-    .divider-small {
-        color: #b9b9b9;
-        font-size: 16px;
-        opacity: 0.8;
+    .socials a {
+        color: #6a6a6a;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+    .socials a:hover { color: #ffffff; }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(20, 1.4em);
+        grid-auto-rows: 1.5em;
+        font-family: 'DGMSaffron-Mono-Regular', 'Courier New', monospace;
+        font-size: 17px;
+        color: #4e4e4e;
         user-select: none;
     }
-    @media (max-width: 768px) {
-        .logo-img {
-            height: 90px;
+    .grid > span, .word span {
+        text-align: center;
+        line-height: 1.5em;
+        transition: background 0.05s linear, color 0.05s linear;
+    }
+    .word {
+        display: contents;
+        text-decoration: none;
+        color: inherit;
+    }
+    .word span {
+        color: #b9b9b9;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .word:hover span,
+    .word:focus-visible span {
+        background: #ffffff;
+        color: #000000;
+        outline: none;
+    }
+    @media (max-width: 720px) {
+        body { padding: 24px; font-size: 14px; }
+        .grid {
+            font-size: min(14px, calc((100vw - 48px) / 26));
+            grid-template-columns: repeat(20, 1.3em);
         }
     }
     </style>
 </head>
 <body>
-    <div class="top-left-menu">
-        <img src="interiorlogo.jpg" class="logo-img" alt="INTERIØR"
-             onmouseenter="document.body.classList.add('logo-hovered')"
-             onmouseleave="document.body.classList.remove('logo-hovered')">
-        <div class="menu-links-row">
-            <a href="about.html" class="menu-link">ABOUT</a>
-            <span class="divider-small">I</span>
-            <a href="sound.html" class="menu-link">SOUND</a>
-            <span class="divider-small">I</span>
-            <a href="mailto:interiorlabel@proton.me" class="menu-link">CONTACT</a>
-        </div>
+    <div class="header">
+        <div class="brand">INTERI<a href="moodboard.html">Ø</a>R</div>
     </div>
+    <div class="about">
+        <p>Record label focused on foward-thinking electronic music</p>
+        <p>Founded in 2025 by Protocol</p>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <div class="socials">
+        <a href="https://interiorr.bandcamp.com/" target="_blank">bandcamp</a>
+        <a href="https://soundcloud.com/interiorlabel" target="_blank">soundcloud</a>
+        <a href="https://www.instagram.com/protocol.intr" target="_blank">instagram</a>
+    </div>
+
+    <script>
+    (() => {
+        const COLS = 20;
+        const ROWS = 16;
+        const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789·:·····     ';
+
+        const words = [
+            { text: 'RELEASES', href: 'releases.html',                  col: 3,  row: 1, vertical: true },
+            { text: 'MIXTAPES', href: 'mixtapes.html',                  col: 13, row: 2, vertical: true },
+            { text: 'READ',     href: 'read.html',                      col: 17, row: 5, vertical: true },
+            { text: 'CONTACT',  href: 'mailto:interiorlabel@proton.me', col: 8,  row: 9, vertical: true },
+        ];
+
+        const grid = Array.from({length: ROWS}, () =>
+            Array.from({length: COLS}, () => ({
+                char: CHARS[Math.floor(Math.random()*CHARS.length)],
+                word: null
+            }))
+        );
+
+        const occupied = new Set();
+        words.forEach((w, wi) => {
+            for (let i = 0; i < w.text.length; i++) {
+                const r = w.vertical ? w.row + i : w.row;
+                const c = w.vertical ? w.col : w.col + i;
+                if (r < ROWS && c < COLS) {
+                    occupied.add(`${r},${c}`);
+                    grid[r][c].word = wi;
+                    grid[r][c].char = w.text[i];
+                }
+            }
+        });
+
+        const gridEl = document.getElementById('grid');
+
+        for (let r = 0; r < ROWS; r++) {
+            for (let c = 0; c < COLS; c++) {
+                if (!occupied.has(`${r},${c}`)) {
+                    const s = document.createElement('span');
+                    s.textContent = grid[r][c].char;
+                    s.style.gridColumn = c + 1;
+                    s.style.gridRow = r + 1;
+                    gridEl.appendChild(s);
+                }
+            }
+        }
+
+        words.forEach((w) => {
+            const a = document.createElement('a');
+            a.className = 'word';
+            a.href = w.href;
+            a.setAttribute('aria-label', w.text);
+            for (let i = 0; i < w.text.length; i++) {
+                const r = w.vertical ? w.row + i : w.row;
+                const c = w.vertical ? w.col : w.col + i;
+                const s = document.createElement('span');
+                s.textContent = w.text[i];
+                s.style.gridColumn = c + 1;
+                s.style.gridRow = r + 1;
+                a.appendChild(s);
+            }
+            gridEl.appendChild(a);
+        });
+    })();
+    </script>
 </body>
 </html>

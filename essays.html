@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>INTERIØR — Essays</title>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @font-face {
+            font-family: 'DGMSaffron-Mono-Regular';
+            src: url('FONTS/DGMSaffron-Mono-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        body {
+            background: #000;
+            color: #b9b9b9;
+            font-family: 'DGMSaffron-Mono-Regular', 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 24px;
+            opacity: 0;
+            animation: fadeIn 0.6s ease-in forwards;
+        }
+
+        .back-arrow {
+            position: fixed;
+            top: 30px;
+            left: 20px;
+            font-family: Arial, sans-serif;
+            font-size: 22px;
+            color: #6a6a6a;
+            text-decoration: none;
+            z-index: 100;
+        }
+        .back-arrow:hover { color: #ffffff; }
+
+        .wrap {
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 16px;
+            font-weight: normal;
+            letter-spacing: 0.08em;
+            color: #b9b9b9;
+            margin-bottom: 28px;
+        }
+        .lede {
+            font-size: 13px;
+            color: #7a7a7a;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .essay-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            text-align: left;
+        }
+        .essay-list li {
+            font-size: 13px;
+            color: #555;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .essay-list a {
+            color: #b9b9b9;
+            text-decoration: none;
+        }
+        .essay-list a:hover {
+            color: #ffffff;
+        }
+
+        .placeholder {
+            font-size: 12px;
+            color: #555;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-arrow">&#8592;</a>
+
+    <div class="wrap">
+        <h1>ESSAYS</h1>
+        <p class="lede">
+            Writing adjacent to the label. Long-form notes on sound,
+            theory, and transmission.
+        </p>
+
+        <!-- When essays are published, render them in this list. -->
+        <ul class="essay-list" hidden>
+            <!--
+            <li>
+                <a href="essays/example.html">Essay title</a>
+                <div>Author · 2026 · ~12 min</div>
+            </li>
+            -->
+        </ul>
+
+        <div class="placeholder">forthcoming</div>
+    </div>
+</body>
+</html>
