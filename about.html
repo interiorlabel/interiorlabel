@@ -1,167 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Protocol</title>
-    <link rel="icon" type="image/jpeg" href="favicon.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT — INTERIØR</title>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
     <style>
-       @font-face {
-            font-family: 'DGMSaffron-Mono-Regular';
-            src: url('FONTS/DGMSaffron-Mono-Regular.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: black;
-            font-family: 'DGMSaffron-Mono-Regular';
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            opacity: 0;
-            animation: fadeIn 0.6s ease-in forwards;
-        }
+    @font-face {
+        font-family: 'Adobe Garamond Pro';
+        src: local('Adobe Garamond Pro'),
+             local('AGaramondPro-Regular'),
+             url('FONTS/AGaramondPro-Regular.otf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .back-arrow {
-            position: fixed;
-            top: 30px;
-            left: 20px;
-            font-family: Arial, sans-serif;
-            font-size: 22px;
-            color: grey;
-            cursor: pointer;
-            text-decoration: none;
-            z-index: 100;
-        }
+    html, body {
+        height: 100%;
+        background: #000;
+    }
 
-        .back-arrow:hover {
-            color: #ffffff;
-        }
+    body {
+        color: #b9b9b9;
+        font-family: 'Adobe Garamond Pro', 'Garamond', 'EB Garamond', serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        padding: 60px 40px 100px;
+        opacity: 0;
+        animation: fadeIn 0.9s ease-out forwards;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
 
-        .text-container {
-            text-align: justify;
-            max-width: 600px;
-            padding: 0 20px;
-        }
+    .title {
+        font-size: 22px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #e4e4e4;
+    }
 
-        p {
-            margin: 0;
-            font-size: 13px;
-            line-height: 1.5;
-            color: #7a7a7a;
-            font-family: 'DGMSaffron-Mono-Regular';
-        }
+    .photo {
+        width: 230px;
+        max-width: 70vw;
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+        border: 1px solid #2a2a2a;
+    }
+    .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        filter: grayscale(1) contrast(1.05);
+    }
 
-        .first-paragraph {
-            margin-bottom: 10px;
-        }
+    .copy {
+        max-width: 42ch;
+        text-align: center;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #cfcfcf;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+    }
 
-        .second-paragraph {
-            margin-bottom: 10px;
-        }
+    .symbol {
+        position: fixed;
+        bottom: 48px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .symbol svg {
+        width: 44px;
+        height: 44px;
+        stroke: #6a6a6a;
+    }
+    .symbol a {
+        display: block;
+        transition: opacity 0.2s ease;
+    }
+    .symbol a:hover {
+        opacity: 0.7;
+    }
 
-        .social-links {
-            display: flex;
-            gap: 40px;
-            margin-top: 40px;
-            justify-content: flex-start;
-        }
-
-        .social-link {
-            color: grey;
-            font-size: 9px;
-            cursor: pointer;
-            text-decoration: underline;
-            font-family: 'DGMSaffron-Mono-Regular';
-            text-transform: uppercase;
-        }
-
-        .social-link:hover {
-            color: #ffffff;
-        }
-
-        .collection-link {
-            display: block;
-            margin-top: 40px;
-            color: grey;
-            font-size: 11px;
-            cursor: pointer;
-            text-decoration: none;
-            font-family: 'DGMSaffron-Mono-Regular';
-            transition: color 0.2s ease;
-        }
-
-        .collection-link:hover {
-            color: #ffffff;
-        }
-
-        #content-frame {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: none;
-            z-index: 1000;
-            background-color: white;
-        }
-        
-        @media (max-width: 600px) {
-            p {
-                font-size: 13px;
-                line-height: 1.55;
-            }
-
-            .social-links {
-                flex-direction: column;  
-                gap: 15px;
-                margin-top: 40px;
-                align-items: flex-start;
-            }
-
-            .social-link {
-                font-size: 9px;
-            }
-        }
+    @media (max-width: 720px) {
+        body { padding: 40px 24px 100px; gap: 32px; }
+        .title { font-size: 19px; }
+        .copy { font-size: 15px; }
+    }
     </style>
 </head>
-
 <body>
-    <a href="index.html" class="back-arrow">&#8592;</a>
 
-    <div class="text-container">
-        <p class="clickable-text first-paragraph" id="protocol-sentence">
-            Record label focused on foward-thinking electronic music
-        </p>
+    <div class="title">About</div>
 
-        <p class="second-paragraph">
-            Founded in 2025 by Protocol
-        </p>
-        
-        <a href="moodboard.html" class="collection-link">collection</a>
-
-        <div class="social-links">
-            <a href="https://interiorr.bandcamp.com/" class="social-link" target="_blank">bandcamp</a>
-            <a href="https://soundcloud.com/interiorlabel" class="social-link" target="_blank">soundcloud</a>
-            <a href="https://www.instagram.com/protocol.intr" class="social-link" target="_blank">instagram</a>
-        </div>
+    <div class="photo">
+        <img src="IMAGES/about.jpg" alt="">
     </div>
 
-    <iframe id="content-frame" src=""></iframe>
+    <div class="copy">
+        <p>Record label focused on foward-thinking electronic music.</p>
+        <p>Founded in 2025 by Protocol</p>
+    </div>
+
+    <div class="symbol">
+        <a href="index.html" aria-label="Home">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="96" height="96" stroke-width="1"/>
+                <line x1="2" y1="2" x2="41" y2="41" stroke-width="1"/>
+                <line x1="98" y1="2" x2="59" y2="41" stroke-width="1"/>
+                <line x1="2" y1="98" x2="41" y2="59" stroke-width="1"/>
+                <line x1="98" y1="98" x2="59" y2="59" stroke-width="1"/>
+                <line x1="50" y1="2" x2="50" y2="41" stroke-width="1"/>
+                <line x1="50" y1="59" x2="50" y2="98" stroke-width="1"/>
+            </svg>
+        </a>
+    </div>
+
 </body>
 </html>
