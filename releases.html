@@ -1,239 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>INTERIØR — Releases</title>
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RELEASES — INTERIØR</title>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <style>
     @font-face {
-      font-family: 'DGMSaffron-Mono-Regular';
-      src: url('FONTS/DGMSaffron-Mono-Regular.otf') format('opentype');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
+        font-family: 'Adobe Garamond Pro';
+        src: local('Adobe Garamond Pro'),
+             local('AGaramondPro-Regular'),
+             url('FONTS/AGaramondPro-Regular.otf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
     }
-
-    *, *::before, *::after {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
-
-    :root {
-      --black: #000000;
-      --white: #ffffff;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
-      width: 100%; height: 100%;
-      overflow: hidden;
-      background: var(--black);
-      font-family: 'DGMSaffron-Mono-Regular', sans-serif;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+        font-family: 'Adobe Garamond Pro', 'Garamond', 'EB Garamond', serif;
     }
 
-    .back-arrow {
-      position: fixed;
-      top: 28px;
-      left: 28px;
-      font-family: Arial, sans-serif;
-      font-size: 18px;
-      color: #6a6a6a;
-      cursor: pointer;
-      text-decoration: none;
-      z-index: 100;
-    }
-    .back-arrow:hover {
-      color: #ffffff;
-    }
+    /* ---------- Glitch intro overlay ---------- */
     #glitch-screen {
-      position: fixed;
-      inset: 0;
-      background: var(--black);
-      z-index: 100;
+        position: fixed;
+        inset: 0;
+        background: #000;
+        z-index: 100;
     }
-
     #glitch-screen::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(255,255,255,0.03) 2px,
-        rgba(255,255,255,0.03) 4px
-      );
-      pointer-events: none;
-      z-index: 2;
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(255,255,255,0.03) 2px,
+            rgba(255,255,255,0.03) 4px
+        );
+        pointer-events: none;
+        z-index: 2;
     }
-
     #glitch-bg {
-      position: absolute;
-      inset: 0;
-      background: var(--black);
+        position: absolute;
+        inset: 0;
+        background: #000;
     }
-
     #glitch-bars {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      z-index: 3;
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        z-index: 3;
     }
-
     .bar {
-      position: absolute;
-      left: 0; right: 0;
-      background: var(--white);
+        position: absolute;
+        left: 0; right: 0;
+        background: #fff;
     }
 
-    /* ── MAIN CONTENT ── */
-    #scene {
-      position: fixed;
-      inset: 0;
-      background: var(--black);
-      opacity: 0;
-      pointer-events: none;
+    /* ---------- Page content (revealed after glitch) ---------- */
+    .page {
+        position: fixed;
+        inset: 0;
+        background: #000;
+        opacity: 0;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 56px;
+        padding: 60px 40px 100px;
+        color: #b9b9b9;
     }
 
-    /* ── RELEASES ── */
-    #releases-wrap {
-      position: absolute;
-      left: 50%;
-      top: 42%;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .title {
+        font-size: 22px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #e4e4e4;
     }
 
-    #lbl-releases {
-      font-family: 'DGMSaffron-Mono-Regular', sans-serif;
-      font-size: 20px;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.5);
-      user-select: none;
-      white-space: nowrap;
-      cursor: default;
+    .list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+    .list a {
+        color: #d8d8d8;
+        text-decoration: none;
+        font-size: 18px;
+        letter-spacing: 0.04em;
+        transition: color 0.2s ease, opacity 0.2s ease;
+    }
+    .list a:hover {
+        color: #ffffff;
+        opacity: 0.85;
     }
 
-    /* ── DROPDOWN LIST ── */
-    #releases-list {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      margin-top: 20px;
+    .symbol {
+        position: fixed;
+        bottom: 48px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .symbol svg {
+        width: 44px;
+        height: 44px;
+        stroke: #6a6a6a;
+    }
+    .symbol a {
+        display: block;
+        transition: opacity 0.2s ease;
+    }
+    .symbol a:hover {
+        opacity: 0.7;
     }
 
-    .artist-item {
-      font-family: 'DGMSaffron-Mono-Regular', sans-serif;
-      font-size: 15px;
-      letter-spacing: 0;
-      color: rgba(255,255,255,0.5);
-      white-space: nowrap;
-      cursor: pointer;
-      text-decoration: underline;
-      text-decoration-color: transparent;
-      text-underline-offset: 3px;
-      transition: color 0.15s ease, text-decoration-color 0.15s ease;
+    @media (max-width: 720px) {
+        .page { padding: 40px 24px 100px; gap: 44px; }
+        .title { font-size: 19px; }
+        .list a { font-size: 16px; }
+        .list { gap: 32px; }
+        .symbol svg { width: 36px; height: 36px; }
     }
-
-    .artist-item:hover {
-      color: var(--white);
-      text-decoration-color: var(--white);
-    }
-
-    .artist-item--inactive {
-      cursor: default;
-      text-decoration: none;
-      pointer-events: none;
-    }
-  </style>
+    </style>
 </head>
 <body>
 
-<a href="index.html" class="back-arrow">&#8592;</a>
-
-<div id="glitch-screen">
-  <div id="glitch-bg"></div>
-  <div id="glitch-bars"></div>
-</div>
-
-<div id="scene">
-
-  <!-- RELEASES — centered with dropdown -->
-  <div id="releases-wrap">
-    <div id="lbl-releases">RELEASES</div>
-    <div id="releases-list">
-      <a class="artist-item" href="int291.html">int291</a>
-      <span class="artist-item artist-item--inactive">int292</span>
+    <div id="glitch-screen">
+        <div id="glitch-bg"></div>
+        <div id="glitch-bars"></div>
     </div>
-  </div>
 
-</div>
+    <div class="page" id="page">
 
-<script>
-  const glitchScreen  = document.getElementById('glitch-screen');
-  const bg            = document.getElementById('glitch-bg');
-  const barsEl        = document.getElementById('glitch-bars');
-  const scene         = document.getElementById('scene');
-  const releasesWrap  = document.getElementById('releases-wrap');
+        <div class="title">Releases</div>
 
-  const rand  = (a, b) => Math.random() * (b - a) + a;
-  const randI = (a, b) => Math.floor(rand(a, b));
-  const wait  = ms => new Promise(r => setTimeout(r, ms));
+        <div class="list">
+            <a href="https://interiorr.bandcamp.com/" target="_blank">INT291</a>
+            <a href="https://interiorr.bandcamp.com/" target="_blank">INT292</a>
+        </div>
 
-  function flashBg(color, duration) {
-    bg.style.background = color;
-    return wait(duration).then(() => { bg.style.background = '#000'; });
-  }
+        <div class="symbol">
+            <a href="index.html" aria-label="Home">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="2" width="96" height="96" stroke-width="1"/>
+                    <line x1="2" y1="2" x2="41" y2="41" stroke-width="1"/>
+                    <line x1="98" y1="2" x2="59" y2="41" stroke-width="1"/>
+                    <line x1="2" y1="98" x2="41" y2="59" stroke-width="1"/>
+                    <line x1="98" y1="98" x2="59" y2="59" stroke-width="1"/>
+                    <line x1="50" y1="2" x2="50" y2="41" stroke-width="1"/>
+                    <line x1="50" y1="59" x2="50" y2="98" stroke-width="1"/>
+                </svg>
+            </a>
+        </div>
 
-  function spawnBars(count) {
-    barsEl.innerHTML = '';
-    for (let i = 0; i < count; i++) {
-      const bar = document.createElement('div');
-      bar.className = 'bar';
-      const h = rand(2, 35);
-      const t = rand(0, 100 - h);
-      bar.style.cssText = `top:${t}%;height:${h}%;opacity:${rand(0.4,1)};`;
-      barsEl.appendChild(bar);
-      setTimeout(() => bar.remove(), rand(30, 120));
-    }
-  }
+    </div>
 
-  async function runGlitch() {
-    for (let i = 0; i < 7; i++) {
-      await flashBg(i % 2 === 0 ? '#fff' : '#000', randI(30, 100));
-      spawnBars(randI(2, 6));
-      await wait(randI(15, 50));
-    }
+    <script>
+        const glitchScreen = document.getElementById('glitch-screen');
+        const bg           = document.getElementById('glitch-bg');
+        const barsEl       = document.getElementById('glitch-bars');
+        const page         = document.getElementById('page');
 
-    for (let i = 0; i < 8; i++) {
-      bg.style.background = Math.random() > 0.5 ? '#fff' : '#000';
-      spawnBars(randI(3, 8));
-      await wait(randI(20, 60));
-    }
+        const rand  = (a, b) => Math.random() * (b - a) + a;
+        const randI = (a, b) => Math.floor(rand(a, b));
+        const wait  = ms => new Promise(r => setTimeout(r, ms));
 
-    bg.style.background = '#fff';
-    await wait(50);
-    bg.style.background = '#000';
-    await wait(80);
+        function flashBg(color, duration) {
+            bg.style.background = color;
+            return wait(duration).then(() => { bg.style.background = '#000'; });
+        }
 
-    glitchScreen.style.transition = 'opacity 0.3s ease';
-    scene.style.transition        = 'opacity 0.3s ease';
-    scene.style.pointerEvents     = 'auto';
-    glitchScreen.style.opacity    = '0';
-    scene.style.opacity           = '1';
+        function spawnBars(count) {
+            barsEl.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                const h = rand(2, 35);
+                const t = rand(0, 100 - h);
+                bar.style.cssText = `top:${t}%;height:${h}%;opacity:${rand(0.4,1)};`;
+                barsEl.appendChild(bar);
+                setTimeout(() => bar.remove(), rand(30, 120));
+            }
+        }
 
-    await wait(250);
+        async function runGlitch() {
+            for (let i = 0; i < 7; i++) {
+                await flashBg(i % 2 === 0 ? '#fff' : '#000', randI(30, 100));
+                spawnBars(randI(2, 6));
+                await wait(randI(15, 50));
+            }
 
-    releasesWrap.style.transition = 'opacity 0.25s ease';
-    releasesWrap.style.opacity    = '1';
+            for (let i = 0; i < 8; i++) {
+                bg.style.background = Math.random() > 0.5 ? '#fff' : '#000';
+                spawnBars(randI(3, 8));
+                await wait(randI(20, 60));
+            }
 
-    await wait(300);
-    glitchScreen.remove();
-  }
+            bg.style.background = '#fff';
+            await wait(50);
+            bg.style.background = '#000';
+            await wait(80);
 
-  runGlitch();
-</script>
+            glitchScreen.style.transition = 'opacity 0.3s ease';
+            page.style.transition         = 'opacity 0.3s ease';
+            page.style.pointerEvents      = 'auto';
+            glitchScreen.style.opacity    = '0';
+            page.style.opacity            = '1';
+
+            await wait(300);
+            glitchScreen.remove();
+        }
+
+        runGlitch();
+    </script>
 </body>
 </html>
