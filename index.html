@@ -7,179 +7,214 @@
     <link rel="icon" type="image/jpeg" href="favicon.jpg">
     <style>
     @font-face {
-        font-family: 'DGMSaffron-Mono-Regular';
-        src: url('FONTS/DGMSaffron-Mono-Regular.otf') format('opentype');
+        font-family: 'Adobe Garamond Pro';
+        src: local('Adobe Garamond Pro'),
+             local('AGaramondPro-Regular'),
+             url('FONTS/AGaramondPro-Regular.otf') format('opentype');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
     }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    body {
+
+    html, body {
+        height: 100%;
         background: #000;
-        color: #6a6a6a;
-        font-family: 'DGMSaffron-Mono-Regular', 'Courier New', monospace;
-        min-height: 100vh;
-        padding: 60px 60px 80px;
-        opacity: 0;
-        animation: fadeIn 0.8s ease-in forwards;
-        font-size: 16px;
-        line-height: 1.2;
     }
-    .header {
-        margin-bottom: 24px;
-    }
-    .brand {
-        font-size: 20px;
-        letter-spacing: 0.08em;
+
+    body {
         color: #b9b9b9;
+        font-family: 'Adobe Garamond Pro', 'Garamond', 'EB Garamond', serif;
+        min-height: 100vh;
+        overflow: hidden;
     }
-    .brand a {
-        color: inherit;
+
+    /* ---------- Intro symbol ---------- */
+    .intro {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        pointer-events: none;
+    }
+    .intro svg {
+        width: 90px;
+        height: 90px;
+        stroke: #b9b9b9;
+        overflow: visible;
+        animation: introOut 1.2s ease-in forwards;
+        animation-delay: 2.6s;
+    }
+    .intro svg .seg {
+        stroke-dasharray: var(--len);
+        stroke-dashoffset: var(--len);
+        animation: draw 1s ease-out forwards;
+        animation-delay: var(--d);
+    }
+    @keyframes draw {
+        to { stroke-dashoffset: 0; }
+    }
+    @keyframes introOut {
+        0%   { opacity: 1; }
+        100% { opacity: 0; }
+    }
+
+    /* ---------- Main menu ---------- */
+    .menu-wrap {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 56px;
+        opacity: 0;
+        animation: menuIn 1.2s ease-out forwards;
+        animation-delay: 3.8s;
+    }
+    @keyframes menuIn {
+        0%   { opacity: 0; transform: translateY(6px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .menu-wrap a {
+        color: #d8d8d8;
         text-decoration: none;
+        font-size: 15px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-align: center;
+        transition: color 0.2s ease, opacity 0.2s ease;
     }
-    .about {
+    .menu-wrap a:hover {
+        color: #ffffff;
+        opacity: 0.85;
+    }
+
+    .menu-symbol {
+        position: absolute;
+        bottom: 48px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .menu-symbol svg {
+        width: 44px;
+        height: 44px;
+        stroke: #6a6a6a;
+        overflow: visible;
+    }
+    .menu-symbol a { display: block; }
+    .menu-symbol .seg {
+        stroke-dasharray: var(--len);
+        stroke-dashoffset: var(--len);
+        animation: draw 0.7s ease-out forwards;
+        animation-delay: calc(4.1s + var(--d));
+    }
+
+    /* ---------- About panel (shown after clicking ABOUT) ---------- */
+    .about-panel {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 60px;
+        z-index: 5;
+    }
+    .about-panel.active {
+        display: flex;
+        animation: menuIn 0.6s ease-out forwards;
+    }
+    .about-panel p {
+        max-width: 56ch;
         font-size: 13px;
         color: #7a7a7a;
         line-height: 1.7;
-        max-width: 56ch;
-        margin-bottom: 32px;
-    }
-    .about p { margin: 0; }
-
-    .socials {
-        display: flex;
-        gap: 28px;
-        margin-top: 40px;
-        font-size: 11px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-    }
-    .socials a {
-        color: #6a6a6a;
-        text-decoration: underline;
-        text-underline-offset: 3px;
-    }
-    .socials a:hover { color: #ffffff; }
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(20, 1.4em);
-        grid-auto-rows: 1.5em;
-        font-family: 'DGMSaffron-Mono-Regular', 'Courier New', monospace;
-        font-size: 17px;
-        color: #4e4e4e;
-        user-select: none;
-    }
-    .grid > span, .word span {
         text-align: center;
-        line-height: 1.5em;
-        transition: background 0.05s linear, color 0.05s linear;
     }
-    .word {
-        display: contents;
-        text-decoration: none;
-        color: inherit;
-    }
-    .word span {
-        color: #b9b9b9;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    .word:hover span,
-    .word:focus-visible span {
-        background: #ffffff;
-        color: #000000;
-        outline: none;
-    }
+
     @media (max-width: 720px) {
-        body { padding: 24px; font-size: 14px; }
-        .grid {
-            font-size: min(14px, calc((100vw - 48px) / 26));
-            grid-template-columns: repeat(20, 1.3em);
-        }
+        .menu-wrap a { font-size: 14px; }
+        .intro svg { width: 70px; height: 70px; }
+        .menu-symbol svg { width: 36px; height: 36px; }
     }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="brand">INTERI<a href="moodboard.html">Ø</a>R</div>
-    </div>
-    <div class="about">
-        <p>Record label focused on foward-thinking electronic music</p>
-        <p>Founded in 2025 by Protocol</p>
+
+    <!-- Intro symbol: fades away after load -->
+    <div class="intro" id="intro">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect class="seg" x="2" y="2" width="96" height="96" stroke-width="1" style="--len:384; --d:0s"/>
+            <line class="seg" x1="2" y1="2" x2="41" y2="41" stroke-width="1" style="--len:55; --d:0.5s"/>
+            <line class="seg" x1="98" y1="2" x2="59" y2="41" stroke-width="1" style="--len:55; --d:0.65s"/>
+            <line class="seg" x1="2" y1="98" x2="41" y2="59" stroke-width="1" style="--len:55; --d:0.65s"/>
+            <line class="seg" x1="98" y1="98" x2="59" y2="59" stroke-width="1" style="--len:55; --d:0.5s"/>
+            <line class="seg" x1="50" y1="2" x2="50" y2="41" stroke-width="1" style="--len:39; --d:0.9s"/>
+            <line class="seg" x1="50" y1="59" x2="50" y2="98" stroke-width="1" style="--len:39; --d:0.9s"/>
+        </svg>
     </div>
 
-    <div class="grid" id="grid"></div>
+    <!-- Main menu -->
+    <div class="menu-wrap" id="menu">
+        <a href="#" id="aboutLink">About</a>
+        <a href="releases.html">Releases</a>
+        <a href="https://soundcloud.com/interiorlabel" target="_blank">Mixtapes</a>
+        <a href="read.html">Read</a>
 
-    <div class="socials">
-        <a href="https://interiorr.bandcamp.com/" target="_blank">bandcamp</a>
-        <a href="https://www.instagram.com/protocol.intr" target="_blank">instagram</a>
+        <div class="menu-symbol">
+            <a href="index.html" aria-label="Home">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="seg" x="2" y="2" width="96" height="96" stroke-width="1" style="--len:384; --d:0s"/>
+                    <line class="seg" x1="2" y1="2" x2="41" y2="41" stroke-width="1" style="--len:55; --d:0.15s"/>
+                    <line class="seg" x1="98" y1="2" x2="59" y2="41" stroke-width="1" style="--len:55; --d:0.2s"/>
+                    <line class="seg" x1="2" y1="98" x2="41" y2="59" stroke-width="1" style="--len:55; --d:0.2s"/>
+                    <line class="seg" x1="98" y1="98" x2="59" y2="59" stroke-width="1" style="--len:55; --d:0.15s"/>
+                    <line class="seg" x1="50" y1="2" x2="50" y2="41" stroke-width="1" style="--len:39; --d:0.3s"/>
+                    <line class="seg" x1="50" y1="59" x2="50" y2="98" stroke-width="1" style="--len:39; --d:0.3s"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- About content, toggled in -->
+    <div class="about-panel" id="aboutPanel">
+        <p>
+            Record label focused on forward-thinking electronic music<br><br>
+            Founded in 2025 by Protocol
+        </p>
     </div>
 
     <script>
-    (() => {
-        const COLS = 20;
-        const ROWS = 16;
-        const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789·:·····     ';
-
-        const words = [
-            { text: 'RELEASES', href: 'releases.html',                  col: 3,  row: 1, vertical: true },
-            { text: 'MIXTAPES', href: 'https://soundcloud.com/interiorlabel',                  col: 13, row: 2, vertical: true },
-            { text: 'READ',     href: 'read.html',                      col: 17, row: 5, vertical: true },
-            { text: 'CONTACT',  href: 'mailto:interiorlabel@proton.me', col: 8,  row: 9, vertical: true },
-        ];
-
-        const grid = Array.from({length: ROWS}, () =>
-            Array.from({length: COLS}, () => ({
-                char: CHARS[Math.floor(Math.random()*CHARS.length)],
-                word: null
-            }))
-        );
-
-        const occupied = new Set();
-        words.forEach((w, wi) => {
-            for (let i = 0; i < w.text.length; i++) {
-                const r = w.vertical ? w.row + i : w.row;
-                const c = w.vertical ? w.col : w.col + i;
-                if (r < ROWS && c < COLS) {
-                    occupied.add(`${r},${c}`);
-                    grid[r][c].word = wi;
-                    grid[r][c].char = w.text[i];
-                }
+        // Remove the intro from the DOM once its fade-out finishes,
+        // so it doesn't block clicks on the menu underneath.
+        const intro = document.getElementById('intro');
+        const introSvg = intro.querySelector('svg');
+        introSvg.addEventListener('animationend', (e) => {
+            if (e.animationName === 'introOut') {
+                intro.style.display = 'none';
             }
         });
 
-        const gridEl = document.getElementById('grid');
+        // Toggle About panel in place of the menu links (simple show/hide)
+        const aboutLink = document.getElementById('aboutLink');
+        const aboutPanel = document.getElementById('aboutPanel');
+        const menu = document.getElementById('menu');
 
-        for (let r = 0; r < ROWS; r++) {
-            for (let c = 0; c < COLS; c++) {
-                if (!occupied.has(`${r},${c}`)) {
-                    const s = document.createElement('span');
-                    s.textContent = grid[r][c].char;
-                    s.style.gridColumn = c + 1;
-                    s.style.gridRow = r + 1;
-                    gridEl.appendChild(s);
-                }
-            }
-        }
-
-        words.forEach((w) => {
-            const a = document.createElement('a');
-            a.className = 'word';
-            a.href = w.href;
-            a.setAttribute('aria-label', w.text);
-            for (let i = 0; i < w.text.length; i++) {
-                const r = w.vertical ? w.row + i : w.row;
-                const c = w.vertical ? w.col : w.col + i;
-                const s = document.createElement('span');
-                s.textContent = w.text[i];
-                s.style.gridColumn = c + 1;
-                s.style.gridRow = r + 1;
-                a.appendChild(s);
-            }
-            gridEl.appendChild(a);
+        aboutLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isActive = aboutPanel.classList.toggle('active');
+            menu.style.opacity = isActive ? '0' : '1';
+            menu.style.pointerEvents = isActive ? 'none' : 'auto';
         });
-    })();
+
+        aboutPanel.addEventListener('click', () => {
+            aboutPanel.classList.remove('active');
+            menu.style.opacity = '1';
+            menu.style.pointerEvents = 'auto';
+        });
     </script>
 </body>
 </html>
