@@ -2,99 +2,129 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>INTERIØR — Essays</title>
-    <link rel="icon" type="image/jpeg" href="favicon.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESSAYS — INTERIØR</title>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
     <style>
-        @font-face {
-            font-family: 'DGMSaffron-Mono-Regular';
-            src: url('FONTS/DGMSaffron-Mono-Regular.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @font-face {
+        font-family: 'Adobe Garamond Pro';
+        src: local('Adobe Garamond Pro'),
+             local('AGaramondPro-Regular'),
+             url('FONTS/AGaramondPro-Regular.otf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            background: #000;
-            color: #b9b9b9;
-            font-family: 'DGMSaffron-Mono-Regular', 'Courier New', monospace;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 24px;
-            opacity: 0;
-            animation: fadeIn 0.6s ease-in forwards;
-        }
+    html, body {
+        min-height: 100%;
+        background: #000;
+    }
 
-        .back-arrow {
-            position: fixed;
-            top: 30px;
-            left: 20px;
-            font-family: Arial, sans-serif;
-            font-size: 22px;
-            color: #6a6a6a;
-            text-decoration: none;
-            z-index: 100;
-        }
-        .back-arrow:hover { color: #ffffff; }
+    body {
+        color: #b9b9b9;
+        font-family: 'Adobe Garamond Pro', 'Garamond', 'EB Garamond', serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        padding: 60px 24px 140px;
+        opacity: 0;
+        animation: fadeIn 0.9s ease-out forwards;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
 
-        .wrap {
-            max-width: 520px;
-            width: 100%;
-            text-align: center;
-        }
-        h1 {
-            font-size: 16px;
-            font-weight: normal;
-            letter-spacing: 0.08em;
-            color: #b9b9b9;
-            margin-bottom: 28px;
-        }
-        .lede {
-            font-size: 13px;
-            color: #7a7a7a;
-            line-height: 1.7;
-            margin-bottom: 40px;
-        }
+    .wrap {
+        max-width: 480px;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+    }
 
-        .essay-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            text-align: left;
-        }
-        .essay-list li {
-            font-size: 13px;
-            color: #555;
-            padding-bottom: 14px;
-            border-bottom: 1px solid #1a1a1a;
-        }
-        .essay-list a {
-            color: #b9b9b9;
-            text-decoration: none;
-        }
-        .essay-list a:hover {
-            color: #ffffff;
-        }
+    .title {
+        font-size: 17px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #e4e4e4;
+    }
 
-        .placeholder {
-            font-size: 12px;
-            color: #555;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            padding: 30px 0;
-        }
+    .lede {
+        font-size: 13px;
+        color: #9a9a9a;
+        line-height: 1.7;
+        max-width: 42ch;
+    }
+
+    .essay-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 18px;
+        text-align: left;
+    }
+    .essay-list li {
+        font-size: 14px;
+        color: #666;
+        padding-bottom: 14px;
+        border-bottom: 1px solid #1a1a1a;
+    }
+    .essay-list a {
+        color: #d8d8d8;
+        text-decoration: none;
+        letter-spacing: 0.02em;
+    }
+    .essay-list a:hover {
+        color: #ffffff;
+    }
+
+    .placeholder {
+        font-size: 12px;
+        color: #4a4a4a;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+    }
+
+    .symbol {
+        position: fixed;
+        bottom: 48px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .symbol svg {
+        width: 44px;
+        height: 44px;
+        stroke: #6a6a6a;
+    }
+    .symbol a {
+        display: block;
+        transition: opacity 0.2s ease;
+    }
+    .symbol a:hover {
+        opacity: 0.7;
+    }
+
+    @media (max-width: 720px) {
+        body { padding: 40px 20px 120px; gap: 24px; }
+        .title { font-size: 16px; }
+        .lede { font-size: 12px; }
+        .symbol svg { width: 36px; height: 36px; }
+    }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-arrow">&#8592;</a>
 
     <div class="wrap">
-        <h1>ESSAYS</h1>
+        <div class="title">Essays</div>
         <p class="lede">
             Writing adjacent to the label. Long-form notes on sound,
             theory, and transmission.
@@ -110,7 +140,22 @@
             -->
         </ul>
 
-        <div class="placeholder">forthcoming</div>
+        <div class="placeholder">Forthcoming</div>
     </div>
+
+    <div class="symbol">
+        <a href="index.html" aria-label="Home">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="96" height="96" stroke-width="1"/>
+                <line x1="2" y1="2" x2="41" y2="41" stroke-width="1"/>
+                <line x1="98" y1="2" x2="59" y2="41" stroke-width="1"/>
+                <line x1="2" y1="98" x2="41" y2="59" stroke-width="1"/>
+                <line x1="98" y1="98" x2="59" y2="59" stroke-width="1"/>
+                <line x1="50" y1="2" x2="50" y2="41" stroke-width="1"/>
+                <line x1="50" y1="59" x2="50" y2="98" stroke-width="1"/>
+            </svg>
+        </a>
+    </div>
+
 </body>
 </html>
