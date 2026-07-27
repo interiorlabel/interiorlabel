@@ -104,6 +104,14 @@
         opacity: 0.85;
     }
 
+    .list-inactive {
+        color: #4a4a4a;
+        font-size: 15px;
+        letter-spacing: 0.04em;
+        cursor: default;
+        pointer-events: none;
+    }
+
     .symbol {
         position: fixed;
         bottom: 48px;
@@ -127,6 +135,7 @@
         .page { padding: 40px 24px 100px; gap: 44px; }
         .title { font-size: 16px; }
         .list a { font-size: 14px; }
+        .list-inactive { font-size: 14px; }
         .list { gap: 32px; }
         .symbol svg { width: 36px; height: 36px; }
     }
@@ -145,7 +154,7 @@
 
         <div class="list">
             <a href="int291.html">INT291</a>
-            <a href="https://interiorr.bandcamp.com/" target="_blank">INT292</a>
+            <span class="list-inactive">INT292</span>
         </div>
 
         <div class="symbol">
