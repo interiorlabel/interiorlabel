@@ -1,228 +1,272 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>INTERIØR — int291 · Channel Zero</title>
-    <link rel="icon" type="image/jpeg" href="favicon.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INT291 — INTERIØR</title>
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
     <style>
+    @font-face {
+        font-family: 'Adobe Garamond Pro';
+        src: local('Adobe Garamond Pro'),
+             local('AGaramondPro-Regular'),
+             url('FONTS/AGaramondPro-Regular.otf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        @font-face {
-            font-family: 'DGMSaffron-Mono-Regular';
-            src: url('FONTS/DGMSaffron-Mono-Regular.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
+    html, body {
+        min-height: 100%;
+        background: #000;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    body {
+        color: #b9b9b9;
+        font-family: 'Adobe Garamond Pro', 'Garamond', 'EB Garamond', serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 34px;
+        padding: 60px 40px 100px;
+        opacity: 0;
+        animation: fadeIn 0.9s ease-out forwards;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
+    .title {
+        font-size: 22px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #e4e4e4;
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #000000;
-            font-family: 'DGMSaffron-Mono-Regular', sans-serif;
-            color: #7a7a7a;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards;
-        }
+    /* ---------- Carousel ---------- */
+    .carousel {
+        position: relative;
+        width: 100%;
+        max-width: 470px;
+        aspect-ratio: 730 / 620;
+        overflow: hidden;
+    }
+    .carousel img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    .carousel img.active {
+        opacity: 1;
+    }
 
-        a {
-            color: #7a7a7a;
-            text-decoration: none;
-        }
+    .carousel-arrow {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #d8d8d8;
+        background: rgba(0,0,0,0.35);
+        border-radius: 50%;
+        font-size: 14px;
+        cursor: pointer;
+        user-select: none;
+        transition: color 0.2s ease, background 0.2s ease;
+    }
+    .carousel-arrow:hover {
+        color: #fff;
+        background: rgba(0,0,0,0.55);
+    }
 
-        a:hover { color: #e0e0e0; }
+    .dots {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+    }
+    .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.35);
+        transition: background 0.2s ease;
+    }
+    .dot.active {
+        background: #ffffff;
+    }
 
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            padding: 28px 28px;
-        }
+    .caption {
+        font-style: italic;
+        font-size: 14px;
+        color: #9a9a9a;
+        text-align: center;
+        max-width: 40ch;
+    }
 
-        .back-arrow {
-            font-family: Arial, sans-serif;
-            font-size: 18px;
-            color: #6a6a6a;
-        }
+    /* ---------- Tracklist (playable) ---------- */
+    .tracklist {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 420px;
+        margin-top: 10px;
+    }
+    .track-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 2px;
+        border-top: 1px solid #1a1a1a;
+        cursor: pointer;
+        color: #b9b9b9;
+        transition: color 0.2s ease;
+    }
+    .track-item:last-child {
+        border-bottom: 1px solid #1a1a1a;
+    }
+    .track-item:hover {
+        color: #ffffff;
+    }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 480px;
-            padding: 100px 32px 60px;
-        }
+    .track-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+    .track-number {
+        font-size: 12px;
+        color: #666;
+        letter-spacing: 0.05em;
+    }
+    .track-name {
+        font-size: 16px;
+        letter-spacing: 0.02em;
+    }
 
-        .release-label {
-            font-size: 10px;
-            color: #555;
-            margin-bottom: 6px;
-            letter-spacing: 0.08em;
-        }
+    .play-icon-wrap {
+        position: relative;
+        width: 12px;
+        height: 14px;
+        flex-shrink: 0;
+    }
+    .play-icon {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 6px 0 6px 10px;
+        border-color: transparent transparent transparent #8a8a8a;
+        position: absolute;
+        top: 1px;
+        left: 0;
+        transition: opacity 0.2s ease;
+    }
+    .pause-wrap {
+        position: absolute;
+        top: 1px;
+        left: 0;
+        display: flex;
+        gap: 3px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+    .pause-bar {
+        width: 3px;
+        height: 12px;
+        background: #8a8a8a;
+    }
+    .track-item.playing .play-icon { opacity: 0; }
+    .track-item.playing .pause-wrap { opacity: 1; }
 
-        .release-title {
-            font-size: 20px;
-            color: #a0a0a0;
-            margin-bottom: 52px;
-            letter-spacing: 0.08em;
-        }
+    .progress-bar-wrap {
+        width: 100%;
+        height: 1px;
+        background: #1a1a1a;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.3s ease;
+    }
+    .progress-bar-wrap.visible {
+        max-height: 1px;
+    }
+    .progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: #d8d8d8;
+        transition: width 0.4s linear;
+    }
 
-        .track-list {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            margin-bottom: 52px;
-        }
+    .purchase {
+        font-style: italic;
+        font-size: 14px;
+        color: #9a9a9a;
+        margin-top: 6px;
+    }
+    .purchase a {
+        color: #d8d8d8;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+    .purchase a:hover {
+        color: #fff;
+    }
 
-        .track-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 0;
-            border-top: 1px solid #1a1a1a;
-            cursor: pointer;
-            color: #8a8a8a;
-            transition: color 0.2s;
-        }
+    .symbol {
+        margin-top: 16px;
+    }
+    .symbol svg {
+        width: 44px;
+        height: 44px;
+        stroke: #6a6a6a;
+    }
+    .symbol a {
+        display: block;
+        transition: opacity 0.2s ease;
+    }
+    .symbol a:hover {
+        opacity: 0.7;
+    }
 
-        .track-item:last-child {
-            border-bottom: 1px solid #1a1a1a;
-        }
-
-        .track-item:hover {
-            color: #ffffff;
-        }
-
-        .track-item.unreleased {
-            cursor: default;
-            color: #3a3a3a;
-        }
-
-        .track-item.unreleased:hover {
-            color: #3a3a3a;
-        }
-
-        .track-item.unreleased .track-number {
-            color: #2e2e2e;
-        }
-
-        .track-left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .track-number {
-            font-size: 11px;
-            color: #555;
-        }
-
-        .track-name {
-            font-size: 14px;
-            letter-spacing: 0.04em;
-        }
-
-        .play-icon-wrap {
-            position: relative;
-            width: 10px;
-            height: 12px;
-            flex-shrink: 0;
-        }
-
-        .play-icon {
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 6px 0 6px 10px;
-            border-color: transparent transparent transparent #8a8a8a;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: opacity 0.2s;
-        }
-
-        .pause-wrap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: flex;
-            gap: 3px;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .pause-bar {
-            width: 3px;
-            height: 12px;
-            background: #8a8a8a;
-        }
-
-        .track-item.playing .play-icon { opacity: 0; }
-        .track-item.playing .pause-wrap { opacity: 1; }
-
-        .progress-bar-wrap {
-            width: 100%;
-            height: 1px;
-            background: #1a1a1a;
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.3s ease;
-        }
-
-        .progress-bar-wrap.visible {
-            max-height: 1px;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: #9a9a9a;
-            transition: width 0.4s linear;
-        }
-
-        .description {
-            font-size: 13px;
-            color: #666;
-            line-height: 1.8;
-        }
-
+    @media (max-width: 720px) {
+        body { padding: 40px 24px 80px; gap: 26px; }
+        .title { font-size: 19px; }
+        .track-name { font-size: 15px; }
+    }
     </style>
 </head>
 <body>
 
-<nav class="nav">
-    <a href="releases.html" class="back-arrow">&#8592;</a>
-</nav>
+    <div class="title">INT291</div>
 
-<div class="container">
+    <div class="carousel" id="carousel">
+        <img src="record1.jpg" alt="INT291 cover — front" class="active">
+        <img src="record2.jpg" alt="INT291 cover — back">
+        <div class="carousel-arrow" id="nextArrow">&#8250;</div>
+        <div class="dots">
+            <div class="dot active" data-i="0"></div>
+            <div class="dot" data-i="1"></div>
+        </div>
+    </div>
 
-    <div class="release-label">PROTOCOL</div>
-    <div class="release-title">CHANNEL ZERO</div>
+    <div class="caption">hand-numbered 180 gram vinyl 12" limited to 150 copies</div>
 
-    <div class="track-list">
+    <div class="tracklist">
 
-        <div class="track-item" onclick="playAudio('lost-signal-noise.mp3', this)" data-index="0">
+        <div class="track-item" data-index="0" data-src="lost-signal-noise.mp3">
             <div class="track-left">
                 <span class="track-number">01</span>
-                <span class="track-name">LOST SIGNAL (NOISE)</span>
+                <span class="track-name">Lost Signal (Noise)</span>
             </div>
             <div class="play-icon-wrap">
                 <div class="play-icon"></div>
@@ -234,76 +278,145 @@
         </div>
         <div class="progress-bar-wrap" id="progress-0"><div class="progress-bar-fill" id="fill-0"></div></div>
 
-        <div class="track-item unreleased">
+        <div class="track-item" data-index="1" data-src="blind-belief.mp3">
             <div class="track-left">
                 <span class="track-number">02</span>
-                <span class="track-name">BLIND BELIEF</span>
+                <span class="track-name">Blind Belief</span>
+            </div>
+            <div class="play-icon-wrap">
+                <div class="play-icon"></div>
+                <div class="pause-wrap">
+                    <div class="pause-bar"></div>
+                    <div class="pause-bar"></div>
+                </div>
             </div>
         </div>
+        <div class="progress-bar-wrap" id="progress-1"><div class="progress-bar-fill" id="fill-1"></div></div>
 
-        <div class="track-item unreleased">
+        <div class="track-item" data-index="2" data-src="electromagnetic-shadow.mp3">
             <div class="track-left">
                 <span class="track-number">03</span>
-                <span class="track-name">ELECTROMAGNETIC SHADOW</span>
+                <span class="track-name">Electromagnetic Shadow</span>
+            </div>
+            <div class="play-icon-wrap">
+                <div class="play-icon"></div>
+                <div class="pause-wrap">
+                    <div class="pause-bar"></div>
+                    <div class="pause-bar"></div>
+                </div>
             </div>
         </div>
+        <div class="progress-bar-wrap" id="progress-2"><div class="progress-bar-fill" id="fill-2"></div></div>
 
-        <div class="track-item unreleased">
+        <div class="track-item" data-index="3" data-src="black-snow-cult.mp3">
             <div class="track-left">
                 <span class="track-number">04</span>
-                <span class="track-name">BLACK SNOW CULT</span>
+                <span class="track-name">Black Snow Cult</span>
+            </div>
+            <div class="play-icon-wrap">
+                <div class="play-icon"></div>
+                <div class="pause-wrap">
+                    <div class="pause-bar"></div>
+                    <div class="pause-bar"></div>
+                </div>
             </div>
         </div>
+        <div class="progress-bar-wrap" id="progress-3"><div class="progress-bar-fill" id="fill-3"></div></div>
 
     </div>
 
-    <div class="description">
-        Live hardware recordings · London · 2026<br>
-        Mastered by Manmade Mastering, Berlin<br>
-        Limited to 150 copies on vinyl
+    <div class="purchase">purchase through <a href="https://interiorr.bandcamp.com/" target="_blank">bandcamp</a></div>
+
+    <div class="symbol">
+        <a href="index.html" aria-label="Home">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="96" height="96" stroke-width="1"/>
+                <line x1="2" y1="2" x2="41" y2="41" stroke-width="1"/>
+                <line x1="98" y1="2" x2="59" y2="41" stroke-width="1"/>
+                <line x1="2" y1="98" x2="41" y2="59" stroke-width="1"/>
+                <line x1="98" y1="98" x2="59" y2="59" stroke-width="1"/>
+                <line x1="50" y1="2" x2="50" y2="41" stroke-width="1"/>
+                <line x1="50" y1="59" x2="50" y2="98" stroke-width="1"/>
+            </svg>
+        </a>
     </div>
 
-</div>
+    <script>
+        const images = document.querySelectorAll('.carousel img');
+        const dots   = document.querySelectorAll('.dot');
+        const arrow  = document.getElementById('nextArrow');
+        let current  = 0;
 
-<script>
-const audio = new Audio();
-let playing = false;
-let progressInterval;
+        function goTo(i) {
+            images[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = (i + images.length) % images.length;
+            images[current].classList.add('active');
+            dots[current].classList.add('active');
+        }
 
-function playAudio(track, element) {
-    if (!playing) {
-        audio.src = track;
-        audio.currentTime = 0;
-        audio.play();
+        arrow.addEventListener('click', () => goTo(current + 1));
+        dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
 
-        element.classList.add('playing');
-        document.getElementById('progress-0').classList.add('visible');
+        // ---------- Track player ----------
+        const audio = new Audio();
+        let activeIndex = null;
+        let progressInterval;
 
-        progressInterval = setInterval(() => {
-            if (!audio.duration) return;
-            const pct = (audio.currentTime / audio.duration) * 100;
-            document.getElementById('fill-0').style.width = pct + '%';
-        }, 400);
+        function stopTrack(index) {
+            const item = document.querySelector(`.track-item[data-index="${index}"]`);
+            item.classList.remove('playing');
+            document.getElementById(`progress-${index}`).classList.remove('visible');
+            document.getElementById(`fill-${index}`).style.width = '0%';
+        }
 
-        playing = true;
+        function playTrack(index, src) {
+            audio.src = src;
+            audio.currentTime = 0;
+            audio.play();
 
-    } else {
-        audio.pause();
-        element.classList.remove('playing');
-        document.getElementById('progress-0').classList.remove('visible');
-        clearInterval(progressInterval);
-        playing = false;
-    }
+            document.querySelector(`.track-item[data-index="${index}"]`).classList.add('playing');
+            document.getElementById(`progress-${index}`).classList.add('visible');
 
-    audio.onended = () => {
-        element.classList.remove('playing');
-        document.getElementById('progress-0').classList.remove('visible');
-        document.getElementById('fill-0').style.width = '0%';
-        clearInterval(progressInterval);
-        playing = false;
-    };
-}
-</script>
+            clearInterval(progressInterval);
+            progressInterval = setInterval(() => {
+                if (!audio.duration) return;
+                const pct = (audio.currentTime / audio.duration) * 100;
+                document.getElementById(`fill-${index}`).style.width = pct + '%';
+            }, 400);
 
+            activeIndex = index;
+        }
+
+        document.querySelectorAll('.track-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const index = item.dataset.index;
+                const src   = item.dataset.src;
+
+                if (activeIndex === index) {
+                    // toggle pause on the currently playing track
+                    audio.pause();
+                    clearInterval(progressInterval);
+                    stopTrack(index);
+                    activeIndex = null;
+                    return;
+                }
+
+                if (activeIndex !== null) {
+                    stopTrack(activeIndex);
+                }
+
+                playTrack(index, src);
+            });
+        });
+
+        audio.addEventListener('ended', () => {
+            if (activeIndex !== null) {
+                stopTrack(activeIndex);
+                clearInterval(progressInterval);
+                activeIndex = null;
+            }
+        });
+    </script>
 </body>
 </html>
