@@ -113,28 +113,6 @@
         animation-delay: calc(4.1s + var(--d));
     }
 
-    /* ---------- About panel (shown after clicking ABOUT) ---------- */
-    .about-panel {
-        position: fixed;
-        inset: 0;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 60px;
-        z-index: 5;
-    }
-    .about-panel.active {
-        display: flex;
-        animation: menuIn 0.6s ease-out forwards;
-    }
-    .about-panel p {
-        max-width: 56ch;
-        font-size: 13px;
-        color: #7a7a7a;
-        line-height: 1.7;
-        text-align: center;
-    }
-
     @media (max-width: 720px) {
         .menu-wrap a { font-size: 14px; }
         .intro svg { width: 70px; height: 70px; }
@@ -159,7 +137,7 @@
 
     <!-- Main menu -->
     <div class="menu-wrap" id="menu">
-        <a href="#" id="aboutLink">About</a>
+        <a href="about.html">About</a>
         <a href="releases.html">Releases</a>
         <a href="https://soundcloud.com/interiorlabel" target="_blank">Mixtapes</a>
         <a href="read.html">Read</a>
@@ -179,14 +157,6 @@
         </div>
     </div>
 
-    <!-- About content, toggled in -->
-    <div class="about-panel" id="aboutPanel">
-        <p>
-            Record label focused on forward-thinking electronic music<br><br>
-            Founded in 2025 by Protocol
-        </p>
-    </div>
-
     <script>
         // Remove the intro from the DOM once its fade-out finishes,
         // so it doesn't block clicks on the menu underneath.
@@ -198,23 +168,6 @@
             }
         });
 
-        // Toggle About panel in place of the menu links (simple show/hide)
-        const aboutLink = document.getElementById('aboutLink');
-        const aboutPanel = document.getElementById('aboutPanel');
-        const menu = document.getElementById('menu');
-
-        aboutLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            const isActive = aboutPanel.classList.toggle('active');
-            menu.style.opacity = isActive ? '0' : '1';
-            menu.style.pointerEvents = isActive ? 'none' : 'auto';
-        });
-
-        aboutPanel.addEventListener('click', () => {
-            aboutPanel.classList.remove('active');
-            menu.style.opacity = '1';
-            menu.style.pointerEvents = 'auto';
-        });
     </script>
 </body>
 </html>
