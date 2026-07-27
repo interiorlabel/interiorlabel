@@ -244,11 +244,58 @@
         opacity: 0.7;
     }
 
+    /* ---------- Press quotes (reveal on scroll) ---------- */
+    .press {
+        display: flex;
+        flex-direction: column;
+        gap: 52px;
+        width: 100%;
+        max-width: 380px;
+        margin-top: 24px;
+    }
+    .quote {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .quote.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .quote-text {
+        font-style: italic;
+        font-size: 15px;
+        line-height: 1.65;
+        color: #c4c4c4;
+        text-align: center;
+    }
+    .quote-text::before { content: "“"; }
+    .quote-text::after  { content: "”"; }
+    .quote-source {
+        margin-top: 12px;
+        font-size: 9px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #6a6a6a;
+        text-align: center;
+    }
+    .quote-source a {
+        color: #6a6a6a;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.2s ease;
+    }
+    .quote-source a:hover {
+        color: #d8d8d8;
+    }
+
     @media (max-width: 720px) {
         body { padding: 32px 20px 140px; gap: 18px; }
         .title { font-size: 16px; margin-bottom: 10px; }
         .track-name { font-size: 13px; }
         .symbol svg { width: 36px; height: 36px; }
+        .quote-text { font-size: 14px; }
+        .press { gap: 40px; margin-top: 16px; }
     }
     </style>
 </head>
@@ -333,6 +380,17 @@
     </div>
 
     <div class="purchase">purchase through <a href="https://interiorr.bandcamp.com/" target="_blank">bandcamp</a></div>
+
+    <div class="press">
+        <div class="quote">
+            <div class="quote-text">The compositions take their time for slow developments; occasionally emerging machine-like structures and morphing hi-hat envelopes lend the material an experimental, almost academic sharpness without sacrificing its direct dance-floor impact.</div>
+            <div class="quote-source"><a href="https://www.hhv.de/records/artikel/protocol-channel-zero-1428503?pquid=a-3116124382520559293d61ea11d72c90" target="_blank">HHV.de</a></div>
+        </div>
+        <div class="quote">
+            <div class="quote-text">Feels like staring at snow on an analog tele while the warehouse next door hosts an Eraserhead-themed industrial rave. Ascetic to the bone, it unfurls four starkly reverberant variants of unsteady bass thrum and gloaming atmospheres.</div>
+            <div class="quote-source"><a href="https://boomkat.com/products/channel-zero-7d4c5ecd-b7bb-4b11-a9e5-73e2aa26e6dd" target="_blank">Boomkat.com</a></div>
+        </div>
+    </div>
 
     <div class="symbol">
         <a href="index.html" aria-label="Home">
@@ -424,6 +482,17 @@
                 activeIndex = null;
             }
         });
+
+        // ---------- Reveal press quotes on scroll ----------
+        const quotes = document.querySelectorAll('.quote');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.35 });
+        quotes.forEach(q => observer.observe(q));
     </script>
 </body>
 </html>
